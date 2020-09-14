@@ -21,10 +21,10 @@ session은 메모리에 저장한다. 별도의 외부 저장장치를 사용하
 - [x] Node.js와 Express를 활용한다.
 - [x] 프로젝트 구성 및 환경 설정
 - [x] MYSQL 설정 및 연결
-- [ ] 사용자 테이블 설계
-- [ ] 카테고리 테이블 설계
-- [ ] 게시글 테이블 설계
-- [ ] 액티비티 테이블 설계
+- [x] 사용자 테이블 설계
+- [x] 카테고리 테이블 설계
+- [x] 게시글 테이블 설계
+- [x] 액티비티 테이블 설계
 
 ### Day 2
 
@@ -52,3 +52,27 @@ session은 메모리에 저장한다. 별도의 외부 저장장치를 사용하
 ### Day 5
 
 - [ ] 전반적인 코드의 리팩터링
+
+<br><br>
+
+## DB tables
+
+|              |              |
+|--------------|--------------|
+| **user**     |              |
+| id           | char(20)     |
+| password     | char(20)     |
+|              |              |
+| **todo**     |              |
+| content      | varchar(256) |
+| date         | varchar(24)  |
+| userid       | varchar(20)  |
+| category     | varchar(26)  |
+|              |              |
+| **activity** |              |
+| date         | varchar(24)  |
+| userid       | varchar(20)  |
+| statement    | varchar(128) |
+|              |              |
+| **category** |              |
+| element      | varchar(64)  |
