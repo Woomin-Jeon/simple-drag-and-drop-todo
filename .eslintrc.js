@@ -8,6 +8,7 @@ module.exports = {
     ecmaVersion: 12,
   },
   rules: {
+    "no-unused-vars": "error",
     "eol-last": "error",
     "indent": ["error", 2],
     "no-trailing-spaces": "error",
