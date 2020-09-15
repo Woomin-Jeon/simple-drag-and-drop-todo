@@ -1,6 +1,6 @@
 const getRandomString = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const STRING_LENGTH = 40;
+  const STRING_LENGTH = 24;
 
   let randomString = '';
   for (let i = 0; i < STRING_LENGTH; i += 1) {
