@@ -4,7 +4,7 @@ const router = express.Router();
 
 const { getRandomString, getCurrentDate } = require('../util/generator');
 
-const { addTodo, getTodos } = require('../database/todo');
+const { addTodo, getTodos, updateTodo } = require('../database/todo');
 
 router.post('/', async (req, res) => {
   const { content } = req.body;
@@ -29,5 +29,11 @@ router.get('/', async (req, res) => {
   res.status(200).send(todos);
 });
 
+router.patch('/', async (req, res) => {
+  const { content: updatedContent, todoId } = req.body;
+
+  await updateTodo(todoId, updatedContent);
+  res.status(200).send('Complete updating todo');
+});
 
 module.exports = router;

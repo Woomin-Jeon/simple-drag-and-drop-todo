@@ -17,4 +17,12 @@ const getTodos = (userId) => {
   });
 };
 
-module.exports = { addTodo, getTodos };
+const updateTodo = (todoId, updatedContent) => {
+  return new Promise(resolve => {
+    connection.query(`UPDATE todo SET content='${updatedContent}' where todoid='${todoId}'`, (error, rows, fields) => {
+      resolve(true);
+    });
+  });
+};
+
+module.exports = { addTodo, getTodos, updateTodo };
