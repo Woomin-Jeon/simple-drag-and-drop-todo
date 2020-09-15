@@ -17,4 +17,15 @@ const addNewUser = (id, password) => {
   });
 };
 
-module.exports = { checkExistingUserById, addNewUser };
+const checkPassword = (id, password) => {
+  return new Promise(resolve => {
+    connection.query(`SELECT password from user where id='${id}'`, (error, rows, fields) => {
+      const [userInfo] = rows;
+      const { password: userPassword } = userInfo;
+
+      resolve(password === userPassword);
+    });
+  });
+};
+
+module.exports = { checkExistingUserById, addNewUser, checkPassword };

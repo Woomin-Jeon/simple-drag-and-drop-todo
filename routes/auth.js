@@ -2,7 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-const { checkExistingUserById, addNewUser } = require('../database/auth');
+const {
+  checkExistingUserById,
+  addNewUser,
+  checkPassword,
+} = require('../database/auth');
 
 router.post('/signup', async (req, res) => {
   const { id, password } = req.body;
@@ -16,6 +20,20 @@ router.post('/signup', async (req, res) => {
 
   await addNewUser(id, password);
   res.status(200).send('Complete signup');
+});
+
+router.post('/signin', async (req, res) => {
+  const { id, password } = req.body;
+
+  const validation = await checkPassword(id, password);
+
+  if (!validation) {
+    res.status(400).send('Unmatched password');
+    return;
+  }
+
+  req.session.userId = id;
+  res.status(200).send('Complete signin');
 });
 
 module.exports = router;
