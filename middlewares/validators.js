@@ -26,4 +26,15 @@ const signinValidator = async (req, res, next) => {
   next();
 };
 
-module.exports = { signupValidator, signinValidator };
+const todoValidator = (req, res, next) => {
+  const { userId } = req.session;
+
+  if (!userId) {
+    res.status(400).send('Invalid user');
+    return;
+  }
+
+  next();
+};
+
+module.exports = { signupValidator, signinValidator, todoValidator };

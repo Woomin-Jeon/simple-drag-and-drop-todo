@@ -6,6 +6,8 @@ const { getRandomString, getCurrentDate } = require('../util/generator');
 
 const { addTodo, getTodos, updateTodo, deleteTodo } = require('../database/todo');
 
+const { todoValidator } = require('../middlewares/validators');
+
 router.post('/', async (req, res) => {
   const { content } = req.body;
   const { userId } = req.session;
@@ -18,12 +20,9 @@ router.post('/', async (req, res) => {
   res.status(200).send('Complete to add todo');
 });
 
+router.get('/', todoValidator);
 router.get('/', async (req, res) => {
   const { userId } = req.session;
-
-  if (!userId) {
-    res.status(400).send('Invalid user');
-  }
 
   const todos = await getTodos(userId);
   res.status(200).send(todos);
