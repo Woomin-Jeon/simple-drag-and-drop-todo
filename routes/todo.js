@@ -29,17 +29,17 @@ router.get('/', async (req, res) => {
   res.status(200).send(todos);
 });
 
-router.patch('/', async (req, res) => {
+router.post('/update', async (req, res) => {
   const { content: updatedContent, todoId } = req.body;
 
   await updateTodo(todoId, updatedContent);
   res.status(200).send('Complete updating todo');
 });
 
-router.delete('/:todoid', async (req, res) => {
-  const todoId = req.params.todoid;
+router.post('/delete', async (req, res) => {
+  const { todoId } = req.body;
 
-  await deleteTodo(todoid);
+  await deleteTodo(todoId);
   res.status(200).send('Complete deleting todo');
 });
 
