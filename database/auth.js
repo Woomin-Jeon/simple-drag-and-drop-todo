@@ -21,6 +21,12 @@ const checkPassword = (id, password) => {
   return new Promise(resolve => {
     connection.query(`SELECT password from user where id='${id}'`, (error, rows, fields) => {
       const [userInfo] = rows;
+
+      if (!userInfo) {
+        resolve(false);
+        return;
+      }
+
       const { password: userPassword } = userInfo;
 
       resolve(password === userPassword);
