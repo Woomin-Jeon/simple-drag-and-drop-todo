@@ -4,7 +4,7 @@ const router = express.Router();
 
 const { getRandomString, getCurrentDate } = require('../util/generator');
 
-const { addTodo, getTodos, updateTodo } = require('../database/todo');
+const { addTodo, getTodos, updateTodo, deleteTodo } = require('../database/todo');
 
 router.post('/', async (req, res) => {
   const { content } = req.body;
@@ -34,6 +34,13 @@ router.patch('/', async (req, res) => {
 
   await updateTodo(todoId, updatedContent);
   res.status(200).send('Complete updating todo');
+});
+
+router.delete('/:todoid', async (req, res) => {
+  const todoId = req.params.todoid;
+
+  await deleteTodo(todoid);
+  res.status(200).send('Complete deleting todo');
 });
 
 module.exports = router;

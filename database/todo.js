@@ -25,4 +25,12 @@ const updateTodo = (todoId, updatedContent) => {
   });
 };
 
-module.exports = { addTodo, getTodos, updateTodo };
+const deleteTodo = (todoId) => {
+  return new Promise(resolve => {
+    connection.query(`DELETE from todo where todoid='${todoId}'`, (error, rows, fields) => {
+      resolve(true);
+    });
+  });
+};
+
+module.exports = { addTodo, getTodos, updateTodo, deleteTodo };
