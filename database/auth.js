@@ -8,4 +8,13 @@ const checkExistingUserById = (id) => {
   });
 };
 
-module.exports = { checkExistingUserById };
+const addNewUser = (id, password) => {
+  new Promise(resolve => {
+    connection.query(
+      'INSERT INTO user (id, password) VALUES(?, ?)', [id, password], (error, rows, fields) => {
+        resolve(true);
+      });
+  });
+};
+
+module.exports = { checkExistingUserById, addNewUser };
