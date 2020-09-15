@@ -9,4 +9,12 @@ const addTodo = (...elements) => {
   });
 };
 
-module.exports = { addTodo };
+const getTodos = (userId) => {
+  return new Promise(resolve => {
+    connection.query(`SELECT * from todo where id='${userId}'`, (error, rows, fields) => {
+      resolve(rows);
+    });
+  });
+};
+
+module.exports = { addTodo, getTodos };

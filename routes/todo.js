@@ -4,7 +4,7 @@ const router = express.Router();
 
 const { getRandomString, getCurrentDate } = require('../util/generator');
 
-const { addTodo } = require('../database/todo');
+const { addTodo, getTodos } = require('../database/todo');
 
 router.post('/', async (req, res) => {
   const { content } = req.body;
@@ -18,8 +18,15 @@ router.post('/', async (req, res) => {
   res.status(200).send('Complete to add todo');
 });
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   const { userId } = req.session;
+
+  if (!userId) {
+    res.status(400).send('Invalid user');
+  }
+
+  const todos = await getTodos(userId);
+  res.status(200).send(todos);
 });
 
 
