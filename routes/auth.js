@@ -11,9 +11,9 @@ const {
 router.post('/signup', async (req, res) => {
   const { id, password } = req.body;
 
-  const validation = await checkExistingUserById(id);
+  const existingUser = await checkExistingUserById(id);
 
-  if (validation) {
+  if (existingUser) {
     res.status(400).send('Already existing id');
     return;
   }
