@@ -11,7 +11,7 @@ const addTodo = (...elements) => {
 
 const getTodos = (userId) => {
   return new Promise(resolve => {
-    connection.query(`SELECT * from todo where id='${userId}'`, (error, rows, fields) => {
+    connection.query(`SELECT * from todo where userid='${userId}'`, (error, rows, fields) => {
       resolve(rows);
     });
   });
