@@ -36,4 +36,9 @@ router.post('/signin', async (req, res) => {
   res.status(200).send('Complete signin');
 });
 
+router.post('/signout', (req, res) => {
+  req.session.destroy();
+  res.status(200).send('Complete signout');
+});
+
 module.exports = router;
