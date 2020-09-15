@@ -6,7 +6,7 @@ const { getRandomString, getCurrentDate } = require('../util/generator');
 
 const { addTodo } = require('../database/todo');
 
-router.post('/add', async (req, res) => {
+router.post('/', async (req, res) => {
   const { content } = req.body;
   const { userId } = req.session;
   const todoId = getRandomString();
@@ -17,5 +17,10 @@ router.post('/add', async (req, res) => {
 
   res.status(200).send('Complete to add todo');
 });
+
+router.get('/', (req, res) => {
+  const { userId } = req.session;
+});
+
 
 module.exports = router;
