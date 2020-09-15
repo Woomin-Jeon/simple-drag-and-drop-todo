@@ -1,37 +1,31 @@
 const connection = require('./');
 
-const checkExistingUserById = (id) => {
-  return new Promise(resolve => {
-    connection.query(`SELECT id from user where id='${id}'`, (error, rows, fields) => {
-      resolve(rows.length > 0);
-    });
+const { checkError } = require('./util');
+
+const checkExistingUserById = (id) => new Promise(resolve => {
+  const query = `SELECT id from user where id='${id}'`;
+  connection.query(query, (error, rows, fields) => {
+    checkError(error);
+    resolve(rows.length > 0);
   });
-};
+});
 
-const addNewUser = (id, password) => {
-  new Promise(resolve => {
-    connection.query(
-      'INSERT INTO user (id, password) VALUES(?, ?)', [id, password], (error, rows, fields) => {
-        resolve(true);
-      });
+const addNewUser = (id, password) => new Promise(resolve => {
+  const query = 'INSERT INTO user (id, password) VALUES(?, ?)';
+  connection.query(query, [id, password], (error, rows, fields) => {
+    checkError(error);
+    resolve(true);
   });
-};
+});
 
-const checkPassword = (id, password) => {
-  return new Promise(resolve => {
-    connection.query(`SELECT password from user where id='${id}'`, (error, rows, fields) => {
-      const [userInfo] = rows;
+const checkPassword = (id, password) => new Promise(resolve => {
+  const query = `SELECT password from user where id='${id}'`;
+  connection.query(query, (error, rows, fields) => {
+    checkError(error);
 
-      if (!userInfo) {
-        resolve(false);
-        return;
-      }
-
-      const { password: userPassword } = userInfo;
-
-      resolve(password === userPassword);
-    });
+    const [userInfo] = rows;
+    userInfo ? resolve(password === userInfo.password) : resolve(false);
   });
-};
+});
 
 module.exports = { checkExistingUserById, addNewUser, checkPassword };

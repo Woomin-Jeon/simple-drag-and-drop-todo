@@ -1,36 +1,37 @@
 const connection = require('./');
 
-const addTodo = (...elements) => {
-  return new Promise(resolve => {
-    connection.query(
-      `INSERT INTO todo (content, userid, todoid, date, category) VALUES(?, ?, ?, ?, ?)`, elements, (error, rows, fields) => {
-        resolve(true);
-      });
-  });
-};
+const { checkError } = require('./util');
 
-const getTodos = (userId) => {
-  return new Promise(resolve => {
-    connection.query(`SELECT * from todo where userid='${userId}'`, (error, rows, fields) => {
-      resolve(rows);
-    });
+const addTodo = (...elements) => new Promise(resolve => {
+  const query = `INSERT INTO todo (content, userid, todoid, date, category) VALUES(?, ?, ?, ?, ?)`;
+  connection.query(query, elements, (error, rows, fields) => {
+    checkError(error);
+    resolve(true);
   });
-};
+});
 
-const updateTodo = (todoId, updatedContent) => {
-  return new Promise(resolve => {
-    connection.query(`UPDATE todo SET content='${updatedContent}' where todoid='${todoId}'`, (error, rows, fields) => {
-      resolve(true);
-    });
+const getTodos = (userId) => new Promise(resolve => {
+  const query = `SELECT * from todo where userid='${userId}'`;
+  connection.query(query, (error, rows, fields) => {
+    checkError(error);
+    resolve(rows);
   });
-};
+});
 
-const deleteTodo = (todoId) => {
-  return new Promise(resolve => {
-    connection.query(`DELETE from todo where todoid='${todoId}'`, (error, rows, fields) => {
-      resolve(true);
-    });
+const updateTodo = (todoId, updatedContent) => new Promise(resolve => {
+  const query = `UPDATE todo SET content='${updatedContent}' where todoid='${todoId}'`;
+  connection.query(query, (error, rows, fields) => {
+    checkError(error);
+    resolve(true);
   });
-};
+});
+
+const deleteTodo = (todoId) => new Promise(resolve => {
+  const query = `DELETE from todo where todoid='${todoId}'`;
+  connection.query(query, (error, rows, fields) => {
+    checkError(error);
+    resolve(true);
+  });
+});
 
 module.exports = { addTodo, getTodos, updateTodo, deleteTodo };
