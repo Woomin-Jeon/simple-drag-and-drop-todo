@@ -3,7 +3,7 @@ import Button from './Button.js';
 
 function LoginForm() {
   this.node = document.createElement('div');
-  this.create = () => {
+  this.render = () => {
     this.node.appendChild(Input({ id: 'id_input', placeholder: '아이디를 입력해주세요' }));
     this.node.appendChild(Input({ id: 'password_input', placeholder: '비밀번호를 입력해주세요' }));
     this.node.appendChild(Button({ id: 'login_button', title: '로그인' }));
@@ -20,7 +20,7 @@ function LoginForm() {
     });
   });
 
-  this.create();
+  this.render();
 }
 
 export default () => new LoginForm().node;

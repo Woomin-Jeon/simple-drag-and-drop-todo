@@ -4,7 +4,7 @@ import { updator } from '../store.js';
 
 function TodoForm() {
   this.node = document.createElement('div');
-  this.create = () => {
+  this.render = () => {
     this.node.appendChild(Input({ id: 'todo_input', placeholder: '할 일을 입력해주세요'}));
     this.node.appendChild(Button({ id: 'todo_button', title: '입력' }));
   };
@@ -21,7 +21,7 @@ function TodoForm() {
     updator.forEach(func => func());
   });
 
-  this.create();
+  this.render();
 }
 
 export default () => new TodoForm().node;

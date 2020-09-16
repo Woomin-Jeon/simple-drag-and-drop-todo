@@ -2,7 +2,7 @@ import { updator } from '../store.js';
 
 function TodoResult() {
   this.node = document.createElement('div');
-  this.create = async () => {
+  this.render = async () => {
     const data = await fetch('http://localhost:3000/todo');
     const todos = await data.json();
     
@@ -13,7 +13,7 @@ function TodoResult() {
     `;
   };
 
-  updator.push(this.create);
+  updator.push(this.render);
 }
 
 export default () => new TodoResult().node;
