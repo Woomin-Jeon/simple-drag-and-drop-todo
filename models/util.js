@@ -1,6 +1,6 @@
-const checkError = (error) => {
+const checkError = (error, reject) => {
   if (error) {
-    console.log(error);
+    reject(error);
   }
 };
 

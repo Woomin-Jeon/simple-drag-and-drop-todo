@@ -23,6 +23,11 @@ app.use(session({
 app.get('/', (req, res) => res.render('index.html'));
 app.use('/', require('./routes'));
 
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).send('Server Error');
+});
+
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}...`);
 });

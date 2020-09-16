@@ -6,10 +6,10 @@ const model = require('../models/auth');
 
 const { signupValidator, signinValidator } = require('../middlewares/validators');
 
-router.post('/signup', signupValidator, async (req, res) => {
+router.post('/signup', signupValidator, async (req, res, next) => {
   const { id, password } = req.body;
 
-  await model.addNewUser(id, password);
+  await model.addNewUser(next)(id, password);
   res.status(200).send('Complete signup');
 });
 
