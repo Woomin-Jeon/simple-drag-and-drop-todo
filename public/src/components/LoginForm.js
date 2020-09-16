@@ -1,6 +1,7 @@
 import Input from './Input.js';
 import Button from './Button.js';
 import axios from '../apis/customAxios.js';
+import { updator } from '../store.js';
 
 function LoginForm() {
   this.node = document.createElement('div');
@@ -9,6 +10,8 @@ function LoginForm() {
     const password = document.querySelector('#password_input').value;
     
     await axios.post('/auth/signin', { id, password });
+
+    updator.forEach(func => func());
   }; 
   this.render = () => {
     this.node.appendChild(Input({ id: 'id_input', placeholder: '아이디를 입력해주세요' }));
