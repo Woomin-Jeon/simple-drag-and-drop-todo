@@ -11,8 +11,4 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-new Promise(resolve => {
-  connection.query(`SELECT * from user`, (error, rows, fields) => {
-    console.log('data: ', rows);
-  });
-});
+module.exports = connection;

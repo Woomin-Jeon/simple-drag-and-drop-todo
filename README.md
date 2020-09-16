@@ -32,11 +32,12 @@
 
 #### Day 2
 
-- [ ] 로그인 및 세션 구현
-- [ ] 아이템 생성 api
-- [ ] 아이템 조회 api
-- [ ] 아이템 수정 api
-- [ ] 아이템 삭제 api
+- [x] 로그인 및 세션 구현
+- [x] 아이템 생성 api
+- [x] 아이템 조회 api
+- [x] 아이템 수정 api
+- [x] 아이템 삭제 api
+- [ ] 아이템 순서 변경 api
 
 #### Day 3
 
@@ -68,6 +69,8 @@
 | date         | varchar(24)  |
 | userid       | varchar(20)  |
 | category     | varchar(26)  |
+| todoid       | varchar(32)  |
+| nextid       | varchar(32)  |
 |              |              |
 | **activity** |              |
 | date         | varchar(24)  |
