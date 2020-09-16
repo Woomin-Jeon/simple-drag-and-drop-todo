@@ -5,8 +5,8 @@ import axios from '../apis/customAxios.js';
 function LoginForm() {
   this.node = document.createElement('div');
   this.buttonEvent = async () => {
-    const id = document.getElementById('id_input').value;
-    const password = document.getElementById('password_input').value;
+    const id = document.querySelector('#id_input').value;
+    const password = document.querySelector('#password_input').value;
     
     await axios.post('/auth/signin', { id, password });
   }; 

@@ -6,7 +6,7 @@ import { updator } from '../store.js';
 function TodoForm() {
   this.node = document.createElement('div');
   this.buttonEvent = async () => {
-    const content = document.getElementById('todo_input').value;
+    const content = document.querySelector('#todo_input').value;
     await axios.post('/todo', { content });
 
     updator.forEach(func => func());
