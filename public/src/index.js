@@ -1,12 +1,14 @@
+import Input from './components/Input.js';
+import Button from './components/Button.js';
+import Todo from './components/Todo.js';
+
 const $app = document.getElementById('app');
-$app.innerHTML = `
-  <input id='id_input' type='text' />
-  <input id='password_input' type='text' />
-  <button id='login_button' type='button'>로그인</button>
-  <br/>
-  <input id='todo_input' type='text' />
-  <button id='todo_button' type='button'>입력</button>
-`;
+
+$app.appendChild(Input({ id: 'id_input', placeholder: '아이디를 입력해주세요' }));
+$app.appendChild(Input({ id: 'password_input', placeholder: '비밀번호를 입력해주세요' }));
+$app.appendChild(Button({ id: 'login_button', title: '로그인' }));
+
+$app.appendChild(Todo());
 
 const $login_button = document.getElementById('login_button');
 $login_button.addEventListener('click', async () => {
