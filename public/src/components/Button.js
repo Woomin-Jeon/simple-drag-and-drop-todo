@@ -11,4 +11,6 @@ function Button({ id, title }, event) {
   this.render();
 }
 
-export default ({ id, title }, event) => new Button({ id, title }, event).node;
+const newButton = ({ id, title }, event) => new Button({ id, title }, event).node;
+
+export default newButton;

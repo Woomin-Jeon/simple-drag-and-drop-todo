@@ -9,5 +9,6 @@ function Input({ id, placeholder }) {
   this.render();
 }
 
-export default ({ id, placeholder }) => new Input({ id, placeholder }).node;
+const newInput = ({ id, placeholder }) => new Input({ id, placeholder }).node;
 
+export default newInput;

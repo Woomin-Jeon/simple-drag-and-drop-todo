@@ -19,4 +19,6 @@ function TodoForm() {
   this.render();
 }
 
-export default () => new TodoForm().node;
+const newTodoForm = () => new TodoForm().node;
+
+export default newTodoForm;

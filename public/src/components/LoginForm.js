@@ -19,4 +19,6 @@ function LoginForm() {
   this.render();
 }
 
-export default () => new LoginForm().node;
+const newLoginForm = () => new LoginForm().node;
+
+export default newLoginForm;

@@ -16,4 +16,6 @@ function TodoResult() {
   updator.push(this.render);
 }
 
-export default () => new TodoResult().node;
+const newTodoResult = () => new TodoResult().node;
+
+export default newTodoResult;
