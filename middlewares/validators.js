@@ -1,9 +1,9 @@
-const { checkExistingUserById, checkPassword } = require('../database/auth');
+const model = require('../models/auth');
 
 const signupValidator = async (req, res, next) => {
   const { id } = req.body;
 
-  const existingUser = await checkExistingUserById(id);
+  const existingUser = await model.checkExistingUserById(id);
 
   if (existingUser) {
     res.status(400).send('Already existing id');
@@ -16,7 +16,7 @@ const signupValidator = async (req, res, next) => {
 const signinValidator = async (req, res, next) => {
   const { id, password } = req.body;
 
-  const validation = await checkPassword(id, password);
+  const validation = await model.checkPassword(id, password);
 
   if (!validation) {
     res.status(400).send('Unmatched password');
