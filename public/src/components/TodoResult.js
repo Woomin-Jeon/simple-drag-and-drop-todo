@@ -15,14 +15,16 @@ function TodoResult() {
           </div>`).join('')}
       </div>
     `;
-    const deleteButtons = document.querySelectorAll('#todo_result > div > .todo_delete_button');
-    deleteButtons.forEach(button => {
-      button.addEventListener('click', async (event) => {
-        const todoId = event.target.id;
-
-        await axios.post('/todo/delete', { todoId });
-        updator.forEach(func => func());
-      });
+    const toroResult = document.querySelector('#todo_result');
+    toroResult.addEventListener('click', async (event) => {
+      if (event.target.className !== 'todo_delete_button') {
+        return;
+      }
+      
+      const todoId = event.target.id;
+      
+      await axios.post('/todo/delete', { todoId });
+      updator.forEach(func => func());
     });
   };
 
