@@ -1,5 +1,6 @@
 import Input from './Input.js';
 import Button from './Button.js';
+import { updator } from '../store.js';
 
 function TodoForm() {
   this.node = document.createElement('div');
@@ -16,6 +17,8 @@ function TodoForm() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ content }),
     });
+
+    updator.forEach(func => func());
   });
 
   this.create();

@@ -13,7 +13,6 @@ function TodoResult() {
     `;
   };
 
-  this.create();
   updator.push(this.create);
 }
 
