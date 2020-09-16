@@ -1,5 +1,6 @@
 import Input from './Input.js';
 import Button from './Button.js';
+import axios from '../apis/customAxios.js';
 
 function LoginForm() {
   this.node = document.createElement('div');
@@ -13,11 +14,7 @@ function LoginForm() {
     const id = document.getElementById('id_input').value;
     const password = document.getElementById('password_input').value;
 
-    const response = await fetch('http://localhost:3000/auth/signin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, password }),
-    });
+    await axios.post('/auth/signin', { id, password });
   });
 
   this.render();

@@ -1,5 +1,6 @@
 import Input from './Input.js';
 import Button from './Button.js';
+import axios from '../apis/customAxios.js';
 import { updator } from '../store.js';
 
 function TodoForm() {
@@ -12,11 +13,7 @@ function TodoForm() {
   this.node.addEventListener('click', async () => {
     const content = document.getElementById('todo_input').value;
 
-    const response = await fetch('http://localhost:3000/todo', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content }),
-    });
+    await axios.post('/todo', { content });
 
     updator.forEach(func => func());
   });

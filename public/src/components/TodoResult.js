@@ -1,10 +1,10 @@
+import axios from '../apis/customAxios.js';
 import { updator } from '../store.js';
 
 function TodoResult() {
   this.node = document.createElement('div');
   this.render = async () => {
-    const data = await fetch('http://localhost:3000/todo');
-    const todos = await data.json();
+    const todos = await axios.get('/todo');
     
     this.node.innerHTML = `
       <div id='todo_result'>
