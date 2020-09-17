@@ -15,7 +15,7 @@ function TodoResult({ category }) {
   });
 
   this.deleteButtonEvent = () => {
-    const todoResult = document.querySelector('#todo_result');
+    const todoResult = document.querySelector(`#todo_result_${category}`);
     todoResult.addEventListener('click', async (event) => {
       if (event.target.className !== 'todo_delete_button') {
         return;
@@ -38,9 +38,9 @@ function TodoResult({ category }) {
     });
   }
 
-  this.render = async () => {
+  this.render = () => {
     this.node.innerHTML = `
-      <div id='todo_result'>
+      <div id='todo_result_${category}'>
         ${store.todos.filter(todo => todo.category === category).map(todo => `
           <div class='todo_result_item' data-todoid='${todo.todoid}' draggable='true'>
             <span>${todo.content}</span>
