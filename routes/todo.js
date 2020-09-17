@@ -9,11 +9,10 @@ const model = require('../models/todo');
 const { loginValidator, todoValidator } = require('../middlewares/validators');
 
 router.post('/', loginValidator, async (req, res, next) => {
-  const { content } = req.body;
+  const { content, category } = req.body;
   const { userId } = req.session;
   const todoId = util.getRandomString();
   const date = util.getCurrentDate();
-  const category = 'todo';
 
   await model.addTodo(next)(content, userId, todoId, date, category);
 
