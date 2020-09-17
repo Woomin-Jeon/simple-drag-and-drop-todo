@@ -7,7 +7,7 @@ function TodoMain() {
   this.node.classList.add('hidden');
 
   this.render = () => {
-    this.node.appendChild(TodoForm());
+    // this.node.appendChild(TodoForm());
     this.node.appendChild(TodoContainer());
   };
 

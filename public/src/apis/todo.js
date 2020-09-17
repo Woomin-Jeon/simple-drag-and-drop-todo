@@ -1,7 +1,7 @@
 import axios from './customAxios.js';
 
-export const addTodo = async (content) => {
-  await axios.post('/todo', { content });
+export const addTodo = async (content, category) => {
+  await axios.post('/todo', { content, category });
 };
 
 export const deleteTodo = async (todoId) => {

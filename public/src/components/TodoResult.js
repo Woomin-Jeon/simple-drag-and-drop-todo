@@ -1,5 +1,6 @@
 import { updator, store, updateRendering } from '../store.js';
 import { deleteTodo, moveTodo } from '../apis/todo.js';
+import TodoForm from './TodoForm.js';
 
 function TodoResult({ category }) {
   this.node = document.createElement('div');
@@ -43,6 +44,7 @@ function TodoResult({ category }) {
     this.node.innerHTML = `
       <div>${todos.length} ${category}</div>
       <div id='todo_result_${category}'>
+        <div id='todo_form_${category}'></div>
         ${todos.map(todo => `
           <div class='todo_result_item' data-todoid='${todo.todoid}' draggable='true'>
             <span>${todo.content}</span>
@@ -50,6 +52,9 @@ function TodoResult({ category }) {
           </div>`).join('')}
       </div>
     `;
+
+    const todoFormArea = document.querySelector(`#todo_form_${category}`);
+    todoFormArea.appendChild(TodoForm({ category }));
     
     this.deleteButtonEvent();
     this.todoDragEvent();
