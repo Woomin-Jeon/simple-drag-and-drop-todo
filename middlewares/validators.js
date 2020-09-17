@@ -26,7 +26,7 @@ const signinValidator = async (req, res, next) => {
   next();
 };
 
-const todoValidator = (req, res, next) => {
+const loginValidator = (req, res, next) => {
   const { userId } = req.session;
 
   if (!userId) {
