@@ -1,13 +1,12 @@
+import { updator, store, updateRendering } from '../store.js';
 import axios from '../apis/customAxios.js';
-import { updator } from '../store.js';
 
 function TodoResult() {
   this.node = document.createElement('div');
   this.render = async () => {
-    const todos = await axios.get('/todo');
     this.node.innerHTML = `
       <div id='todo_result'>
-        ${todos.map(todo => `
+        ${store.todos.map(todo => `
           <div>
             <span>(${todo.category})</span>
             <span>${todo.content}</span>
@@ -15,8 +14,8 @@ function TodoResult() {
           </div>`).join('')}
       </div>
     `;
-    const toroResult = document.querySelector('#todo_result');
-    toroResult.addEventListener('click', async (event) => {
+    const todoResult = document.querySelector('#todo_result');
+    todoResult.addEventListener('click', async (event) => {
       if (event.target.className !== 'todo_delete_button') {
         return;
       }
@@ -24,7 +23,8 @@ function TodoResult() {
       const todoId = event.target.id;
       
       await axios.post('/todo/delete', { todoId });
-      updator.forEach(func => func());
+
+      updateRendering();
     });
   };
 
