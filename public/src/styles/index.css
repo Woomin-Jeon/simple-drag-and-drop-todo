@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.hidden {
+  display: none;
+}
+
 .todo_result {
   border: 1px solid;
   width: 100%;

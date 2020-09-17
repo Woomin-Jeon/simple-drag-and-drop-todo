@@ -16,6 +16,8 @@ function LoginForm() {
       return;
     }
 
+    document.querySelector('#todo_main').classList.remove('hidden');
+    document.querySelector('#login_form').classList.add('hidden');
     await updateRendering();
   }; 
 
