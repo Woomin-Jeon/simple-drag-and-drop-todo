@@ -16,7 +16,8 @@ function LoginForm() {
       return;
     }
 
-    document.querySelector('#todo_main').classList.remove('hidden');
+    document.querySelector('#todo_container').classList.remove('hidden');
+    document.querySelector('#todo_container').classList.add('flex');
     document.querySelector('#login_form').classList.add('hidden');
     await updateRendering();
   }; 

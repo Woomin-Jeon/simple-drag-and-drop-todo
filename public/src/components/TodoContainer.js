@@ -2,7 +2,8 @@ import TodoResult from './TodoResult.js';
 
 function TodoContainer() {
   this.node = document.createElement('div');
-  this.node.classList.add('flex');
+  this.node.setAttribute('id', 'todo_container');
+  this.node.classList.add('hidden');
 
   this.render = () => {
     this.node.appendChild(TodoResult({ category: 'todo' }));
