@@ -1,8 +1,9 @@
 import { updator, store, updateRendering } from '../store.js';
 import { deleteTodo } from '../apis/todo.js';
 
-function TodoResult() {
+function TodoResult({ category }) {
   this.node = document.createElement('div');
+  this.node.classList.add('todo_result');
 
   this.deleteButtonEvent = () => {
     const todoResult = document.querySelector('#todo_result');
@@ -20,9 +21,8 @@ function TodoResult() {
   this.render = async () => {
     this.node.innerHTML = `
       <div id='todo_result'>
-        ${store.todos.map(todo => `
+        ${store.todos.filter(todo => todo.category === category).map(todo => `
           <div>
-            <span>(${todo.category})</span>
             <span>${todo.content}</span>
             <button id=${todo.todoid} class='todo_delete_button'>삭제</button>
           </div>`).join('')}
@@ -35,6 +35,6 @@ function TodoResult() {
   updator.push(this.render);
 }
 
-const newTodoResult = () => new TodoResult().node;
+const newTodoResult = ({ category }) => new TodoResult({ category }).node;
 
 export default newTodoResult;
