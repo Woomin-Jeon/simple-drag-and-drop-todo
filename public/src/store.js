@@ -11,8 +11,6 @@ export const action = {
 };
 
 export const updator = [action.updateTodos];
-export const updateRendering = () => {
-  return updator.reduce((previousPromise, currentPromise) => {
-    return previousPromise.then(() => currentPromise());
-  }, Promise.resolve());
-};
+export const updateRendering = () =>
+  updator.reduce((previousPromise, currentPromise) =>
+    previousPromise.then(() => currentPromise()), Promise.resolve());

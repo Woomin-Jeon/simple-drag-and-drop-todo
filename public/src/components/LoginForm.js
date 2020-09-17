@@ -5,16 +5,18 @@ import { signin } from '../apis/auth.js';
 
 function LoginForm() {
   this.node = document.createElement('div');
-  this.buttonEvent = async () => {
+  
+  this.loginButtonEvent = async () => {
     const id = document.querySelector('#id_input').value;
     const password = document.querySelector('#password_input').value;    
     await signin(id, password);
     await updateRendering();
   }; 
+
   this.render = () => {
     this.node.appendChild(Input({ id: 'id_input', placeholder: '아이디를 입력해주세요' }));
     this.node.appendChild(Input({ id: 'password_input', placeholder: '비밀번호를 입력해주세요' }));
-    this.node.appendChild(Button({ id: 'login_button', title: '로그인' }, this.buttonEvent));
+    this.node.appendChild(Button({ id: 'login_button', title: '로그인' }, this.loginButtonEvent));
   };
 
   this.render();

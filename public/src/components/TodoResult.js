@@ -3,6 +3,20 @@ import { deleteTodo } from '../apis/todo.js';
 
 function TodoResult() {
   this.node = document.createElement('div');
+
+  this.deleteButtonEvent = () => {
+    const todoResult = document.querySelector('#todo_result');
+    todoResult.addEventListener('click', async (event) => {
+      if (event.target.className !== 'todo_delete_button') {
+        return;
+      }
+      
+      const todoId = event.target.id;
+      await deleteTodo(todoId)
+      await updateRendering();
+    });
+  }
+
   this.render = async () => {
     this.node.innerHTML = `
       <div id='todo_result'>
@@ -14,16 +28,8 @@ function TodoResult() {
           </div>`).join('')}
       </div>
     `;
-    const todoResult = document.querySelector('#todo_result');
-    todoResult.addEventListener('click', async (event) => {
-      if (event.target.className !== 'todo_delete_button') {
-        return;
-      }
-      
-      const todoId = event.target.id;
-      await deleteTodo(todoId)
-      await updateRendering();
-    });
+    
+    this.deleteButtonEvent();
   };
 
   updator.push(this.render);
