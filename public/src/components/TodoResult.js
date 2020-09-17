@@ -1,9 +1,18 @@
 import { updator, store, updateRendering } from '../store.js';
-import { deleteTodo } from '../apis/todo.js';
+import { deleteTodo, moveTodo } from '../apis/todo.js';
 
 function TodoResult({ category }) {
   this.node = document.createElement('div');
   this.node.classList.add('todo_result');
+  this.node.setAttribute('droppable', 'true');
+
+  this.node.addEventListener('dragover', (event) => event.preventDefault());
+  this.node.addEventListener('drop', async (event) => {
+    const targetTodoId = event.dataTransfer.getData('todoid');
+
+    await moveTodo(targetTodoId, category);
+    await updateRendering();
+  });
 
   this.deleteButtonEvent = () => {
     const todoResult = document.querySelector('#todo_result');
@@ -18,11 +27,22 @@ function TodoResult({ category }) {
     });
   }
 
+  this.todoDragEvent = (event) => {
+    const todoItems = document.querySelectorAll('.todo_result_item');
+
+    todoItems.forEach(item => {
+      item.addEventListener('dragstart', (event) => {
+        const targetTodoId = event.target.dataset.todoid;
+        event.dataTransfer.setData('todoid', targetTodoId);
+      });
+    });
+  }
+
   this.render = async () => {
     this.node.innerHTML = `
       <div id='todo_result'>
         ${store.todos.filter(todo => todo.category === category).map(todo => `
-          <div class='todo_result_item'>
+          <div class='todo_result_item' data-todoid='${todo.todoid}' draggable='true'>
             <span>${todo.content}</span>
             <button id=${todo.todoid} class='todo_delete_button'>삭제</button>
           </div>`).join('')}
@@ -30,6 +50,7 @@ function TodoResult({ category }) {
     `;
     
     this.deleteButtonEvent();
+    this.todoDragEvent();
   };
 
   updator.push(this.render);
