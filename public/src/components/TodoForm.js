@@ -5,6 +5,8 @@ import { addTodo } from '../apis/todo.js';
 
 function TodoForm() {
   this.node = document.createElement('div');
+  this.node.setAttribute('id', 'todo_form');
+  this.node.classList.add('hidden');
   
   this.addButtonEvent = async () => {
     const content = document.querySelector('#todo_input').value;

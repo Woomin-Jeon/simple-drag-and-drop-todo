@@ -11,3 +11,9 @@
   width: 100%;
   height: 700px;
 }
+
+.todo_result_item {
+  border: 1px solid;
+  padding: 5px;
+  margin: 5px;
+}

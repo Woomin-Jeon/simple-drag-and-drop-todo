@@ -22,7 +22,7 @@ function TodoResult({ category }) {
     this.node.innerHTML = `
       <div id='todo_result'>
         ${store.todos.filter(todo => todo.category === category).map(todo => `
-          <div>
+          <div class='todo_result_item'>
             <span>${todo.content}</span>
             <button id=${todo.todoid} class='todo_delete_button'>삭제</button>
           </div>`).join('')}
