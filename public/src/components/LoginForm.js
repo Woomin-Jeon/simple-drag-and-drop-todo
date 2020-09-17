@@ -1,17 +1,15 @@
 import Input from './Input.js';
 import Button from './Button.js';
-import axios from '../apis/customAxios.js';
 import { updateRendering } from '../store.js';
+import { signin } from '../apis/auth.js';
 
 function LoginForm() {
   this.node = document.createElement('div');
   this.buttonEvent = async () => {
     const id = document.querySelector('#id_input').value;
-    const password = document.querySelector('#password_input').value;
-    
-    await axios.post('/auth/signin', { id, password });
-
-    updateRendering();
+    const password = document.querySelector('#password_input').value;    
+    await signin(id, password);
+    await updateRendering();
   }; 
   this.render = () => {
     this.node.appendChild(Input({ id: 'id_input', placeholder: '아이디를 입력해주세요' }));

@@ -1,5 +1,5 @@
 import { updator, store, updateRendering } from '../store.js';
-import axios from '../apis/customAxios.js';
+import { deleteTodo } from '../apis/todo.js';
 
 function TodoResult() {
   this.node = document.createElement('div');
@@ -21,10 +21,8 @@ function TodoResult() {
       }
       
       const todoId = event.target.id;
-      
-      await axios.post('/todo/delete', { todoId });
-
-      updateRendering();
+      await deleteTodo(todoId)
+      await updateRendering();
     });
   };
 

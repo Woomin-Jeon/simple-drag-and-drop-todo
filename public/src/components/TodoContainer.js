@@ -1,4 +1,3 @@
-import axios from '../apis/customAxios.js';
 import TodoResult from './TodoResult.js';
 
 function TodoContainer() {

@@ -12,7 +12,7 @@ export const action = {
 
 export const updator = [action.updateTodos];
 export const updateRendering = () => {
-  updator.reduce((previousPromise, currentPromise) => {
+  return updator.reduce((previousPromise, currentPromise) => {
     return previousPromise.then(() => currentPromise());
   }, Promise.resolve());
 };
