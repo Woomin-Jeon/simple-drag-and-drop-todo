@@ -1,24 +1,26 @@
 import Input from './Input.js';
 import Button from './Button.js';
-import axios from '../apis/customAxios.js';
-import { updator } from '../store.js';
+import { updateRendering } from '../store.js';
+import { addTodo } from '../apis/todo.js';
 
-function TodoForm() {
+function TodoForm({ category }) {
   this.node = document.createElement('div');
-  this.buttonEvent = async () => {
-    const content = document.querySelector('#todo_input').value;
-    await axios.post('/todo', { content });
-
-    updator.forEach(func => func());
+  this.node.setAttribute('id', 'todo_form');
+  
+  this.addButtonEvent = async () => {
+    const content = document.querySelector(`#todo_input_${category}`).value;
+    await addTodo(content, category);
+    await updateRendering();
   };
+  
   this.render = () => {
-    this.node.appendChild(Input({ id: 'todo_input', placeholder: '할 일을 입력해주세요'}));
-    this.node.appendChild(Button({ id: 'todo_button', title: '입력' }, this.buttonEvent));
+    this.node.appendChild(Input({ id: `todo_input_${category}`, placeholder: '할 일을 입력해주세요'}));
+    this.node.appendChild(Button({ id: `todo_button_${category}`, title: '입력' }, this.addButtonEvent));
   };
 
   this.render();
 }
 
-const newTodoForm = () => new TodoForm().node;
+const newTodoForm = ({ category }) => new TodoForm({ category }).node;
 
 export default newTodoForm;

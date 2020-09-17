@@ -26,7 +26,7 @@ const signinValidator = async (req, res, next) => {
   next();
 };
 
-const todoValidator = (req, res, next) => {
+const loginValidator = (req, res, next) => {
   const { userId } = req.session;
 
   if (!userId) {
@@ -37,4 +37,18 @@ const todoValidator = (req, res, next) => {
   next();
 };
 
-module.exports = { signupValidator, signinValidator, todoValidator };
+const todoValidator = async (req, res, next) => {
+  const { userId } = req.session;
+  const { todoId } = req.body;
+
+  const validation = await model.checkIsAuthorOfTodo(userId, todoId);
+
+  if (!validation) {
+    res.statue(400).send('Not correct author');
+    return;
+  }
+
+  next();
+};
+
+module.exports = { signupValidator, signinValidator, loginValidator, todoValidator };
