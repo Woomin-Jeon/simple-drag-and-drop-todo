@@ -39,9 +39,11 @@ function TodoResult({ category }) {
   }
 
   this.render = () => {
+    const todos = store.todos.filter(todo => todo.category === category);
     this.node.innerHTML = `
+      <div>${todos.length} ${category}</div>
       <div id='todo_result_${category}'>
-        ${store.todos.filter(todo => todo.category === category).map(todo => `
+        ${todos.map(todo => `
           <div class='todo_result_item' data-todoid='${todo.todoid}' draggable='true'>
             <span>${todo.content}</span>
             <button id=${todo.todoid} class='todo_delete_button'>삭제</button>
