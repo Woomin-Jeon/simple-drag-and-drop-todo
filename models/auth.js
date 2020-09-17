@@ -28,4 +28,13 @@ const checkPassword = (next) => (id, password) => new Promise((resolve, reject) 
   });
 }).catch(error => next(error));
 
-module.exports = { checkExistingUserById, addNewUser, checkPassword };
+const checkIsAuthorOfTodo = (next) => (userId, todoId) => new Promise((resolve, reject) => {
+  const query = `SELECT userid from todo where todoid='${todoId}'`;
+  connection.query(query, (error, rows, fields) => {
+    checkError(error, reject);
+    const [todo] = rows;
+    todo ? resolve(userId === todo.userid) : resolve(false);
+  });
+}).catch(error => next(error));
+
+module.exports = { checkExistingUserById, addNewUser, checkPassword, checkIsAuthorOfTodo };

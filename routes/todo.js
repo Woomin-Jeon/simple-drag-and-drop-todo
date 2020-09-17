@@ -6,7 +6,7 @@ const util = require('../util/generator');
 
 const model = require('../models/todo');
 
-const { loginValidator } = require('../middlewares/validators');
+const { loginValidator, todoValidator } = require('../middlewares/validators');
 
 router.post('/', loginValidator, async (req, res, next) => {
   const { content } = req.body;
@@ -27,21 +27,21 @@ router.get('/', loginValidator, async (req, res, next) => {
   res.status(200).json(todos);
 });
 
-router.post('/update', loginValidator, async (req, res, next) => {
+router.post('/update', loginValidator, todoValidator, async (req, res, next) => {
   const { content: updatedContent, todoId } = req.body;
 
   await model.updateTodo(next)(todoId, updatedContent);
   res.status(200).send('Complete updating todo');
 });
 
-router.post('/delete', loginValidator, async (req, res, next) => {
+router.post('/delete', loginValidator, todoValidator, async (req, res, next) => {
   const { todoId } = req.body;
 
   await model.deleteTodo(next)(todoId);
   res.status(200).send('Complete deleting todo');
 });
 
-router.post('/move', loginValidator, async (req, res, next) => {
+router.post('/move', loginValidator, todoValidator, async (req, res, next) => {
   const { todoId, category } = req.body;
 
   await model.moveTodo(next)(todoId, category);
