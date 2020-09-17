@@ -5,11 +5,17 @@ import { signin } from '../apis/auth.js';
 
 function LoginForm() {
   this.node = document.createElement('div');
+  this.node.setAttribute('id', 'login_form');
   
   this.loginButtonEvent = async () => {
     const id = document.querySelector('#id_input').value;
     const password = document.querySelector('#password_input').value;    
-    await signin(id, password);
+    const response = await signin(id, password);
+    
+    if (response.status !== 200) {
+      return;
+    }
+
     await updateRendering();
   }; 
 
