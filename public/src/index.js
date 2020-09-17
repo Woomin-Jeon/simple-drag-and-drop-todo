@@ -1,9 +1,7 @@
-import TodoForm from './components/TodoForm.js';
-import TodoContainer from './components/TodoContainer.js';
 import LoginForm from './components/LoginForm.js';
+import TodoMain from './components/TodoMain.js';
 
 const app = document.getElementById('app');
 
 app.appendChild(LoginForm());
-app.appendChild(TodoForm());
-app.appendChild(TodoContainer());
+app.appendChild(TodoMain());
