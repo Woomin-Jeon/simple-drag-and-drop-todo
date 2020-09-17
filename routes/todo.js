@@ -41,4 +41,11 @@ router.post('/delete', async (req, res, next) => {
   res.status(200).send('Complete deleting todo');
 });
 
+router.post('/move', async (req, res, next) => {
+  const { todoId, category } = req.body;
+
+  await model.moveTodo(next)(todoId, category);
+  res.status(200).send('Complete to move category');
+});
+
 module.exports = router;
