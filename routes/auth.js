@@ -2,20 +2,18 @@ const express = require('express');
 
 const router = express.Router();
 
-const { addNewUser } = require('../database/auth');
+const model = require('../models/auth');
 
 const { signupValidator, signinValidator } = require('../middlewares/validators');
 
-router.post('/signup', signupValidator);
-router.post('/signup', async (req, res) => {
+router.post('/signup', signupValidator, async (req, res, next) => {
   const { id, password } = req.body;
 
-  await addNewUser(id, password);
+  await model.addNewUser(next)(id, password);
   res.status(200).send('Complete signup');
 });
 
-router.post('/signin', signinValidator);
-router.post('/signin', async (req, res) => {
+router.post('/signin', signinValidator, async (req, res) => {
   const { id } = req.body;
 
   req.session.userId = id;

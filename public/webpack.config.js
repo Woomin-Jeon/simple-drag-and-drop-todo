@@ -27,4 +27,8 @@ module.exports = {
       filename: 'index.html',
     }),
   ],
+  devServer: {
+    inline: true,
+    historyApiFallback: true,
+  },
 };

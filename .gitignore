@@ -1,3 +1,5 @@
 node_modules
 .env
 J181.pem
+public/index.html
+public/main.js
