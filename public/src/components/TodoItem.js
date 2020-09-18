@@ -1,3 +1,5 @@
+import Button from './Button.js';
+
 function TodoItem({ todo, category }) {
   this.node = document.createElement('div');
   this.node.classList.add('todo_container_item');
@@ -12,11 +14,8 @@ function TodoItem({ todo, category }) {
   }
 
   this.render = () => {
-    this.node.innerHTML = `
-      <span>${todo.content}</span>
-      <button id=${todo.todoid} class='todo_delete_button'>삭제</button>
-    `;
-
+    this.node.innerHTML = `<span>${todo.content}</span>`;
+    this.node.appendChild(Button({ id: todo.todoid, className: 'todo_delete_button', title: '삭제' }))
     this.todoDragEvent();
   };
 
