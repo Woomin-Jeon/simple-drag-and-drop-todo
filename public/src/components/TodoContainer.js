@@ -16,21 +16,9 @@ function TodoContainer({ category }) {
     await updateRendering();
   });
 
-  this.deleteButtonEvent = () => {
-    const todoContainerItems = document.querySelector(`#todo_container_items_${category}`);
-    todoContainerItems.addEventListener('click', async (event) => {
-      if (event.target.className !== 'todo_delete_button') {
-        return;
-      }
-      
-      const todoId = event.target.id;
-      await deleteTodo(todoId)
-      await updateRendering();
-    });
-  }
-
   this.render = () => {
     const todos = store.todos.filter(todo => todo.category === category);
+    
     this.node.innerHTML = `
       <div>${todos.length} ${category}</div>
       <div id='todo_form_${category}'></div>
@@ -42,8 +30,15 @@ function TodoContainer({ category }) {
 
     const todoContainerItems = document.querySelector(`#todo_container_items_${category}`);
     todos.map(todo => todoContainerItems.appendChild(TodoItem({ todo, category })));
-
-    this.deleteButtonEvent();
+    todoContainerItems.addEventListener('click', async (event) => {
+      if (event.target.className !== 'todo_delete_button') {
+        return;
+      }
+      
+      const todoId = event.target.id;
+      await deleteTodo(todoId)
+      await updateRendering();
+    });
   };
 
   updator.push(this.render);
