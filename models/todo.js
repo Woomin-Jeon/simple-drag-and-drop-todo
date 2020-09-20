@@ -11,7 +11,7 @@ const addTodo = (next) => (...elements) => new Promise((resolve, reject) => {
 }).catch(error => next(error));
 
 const getTodos = (next) => (userId) => new Promise((resolve, reject) => {
-  const query = `SELECT * from todo where userid=?`;
+  const query = `SELECT content,date,userid,todoid,category from todo where userid=?`;
   connection.query(query, [userId], (error, rows, fields) => {
     checkError(error, reject);
     resolve(rows);
