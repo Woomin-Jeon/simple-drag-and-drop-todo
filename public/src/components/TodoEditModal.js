@@ -2,7 +2,7 @@ import Modal from './Modal.js';
 import { updateTodo } from '../apis/todo.js';
 import { updateRendering } from '../store.js';
 
-function EditModal({ todo }) {
+function TodoEditModal({ todo }) {
   this.node = document.createElement('div');
   
   this.modalEditEvent = async () => {
@@ -26,6 +26,6 @@ function EditModal({ todo }) {
   this.render();
 }
 
-const newEditModal = ({ todo }) => new EditModal({ todo }).node;
+const newTodoEditModal = ({ todo }) => new TodoEditModal({ todo }).node;
 
-export default newEditModal;
+export default newTodoEditModal;

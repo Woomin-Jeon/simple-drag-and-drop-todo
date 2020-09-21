@@ -1,5 +1,5 @@
 import Button from './Button.js';
-import EditModal from './EditModal.js';
+import TodoEditModal from './TodoEditModal.js';
 import { deleteTodo } from '../apis/todo.js';
 import { updateRendering } from '../store.js';
 
@@ -15,10 +15,10 @@ function TodoItem({ todo, category }) {
   });
 
   this.node.addEventListener('dblclick', () => {
-    const editModal = document.querySelector(`#todo_item_edit_modal_${todo.todoid}`);
+    const todoEditModal = document.querySelector(`#todo_item_edit_modal_${todo.todoid}`);
     const overlay = document.querySelector('#overlay');
     
-    [editModal, overlay].forEach(dom => dom.classList.remove('hidden'));
+    [todoEditModal, overlay].forEach(dom => dom.classList.remove('hidden'));
   });
 
   this.deleteButtonEvent = () => {
@@ -36,7 +36,7 @@ function TodoItem({ todo, category }) {
       title: '삭제',
       event: this.deleteButtonEvent,
     }));
-    this.node.appendChild(EditModal({ todo }));
+    this.node.appendChild(TodoEditModal({ todo }));
   };
 
   this.render();
