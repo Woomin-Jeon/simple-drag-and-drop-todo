@@ -2,13 +2,19 @@ const mysql = require('mysql');
 
 require('dotenv').config();
 
-const connection = mysql.createConnection({
+const pool = mysql.createPool({
   host: process.env.DB_HOST_IP,
   user: process.env.DB_ID,
   password: process.env.DB_PASSWORD,
   database: 'boostcamp_todolist',
+  connectionLimit: 12,
 });
 
-connection.connect();
+const connectPool = (queryCallback) => {
+  pool.getConnection((err, connection) => {
+    queryCallback(connection);
+  });
+};
 
-module.exports = connection;
+
+module.exports = connectPool;
