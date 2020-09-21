@@ -9,6 +9,11 @@ function TodoItem({ todo, category }) {
   this.node.setAttribute('data-todoid', `${todo.todoid}`);
   this.node.setAttribute('draggable', 'true');
 
+  this.node.addEventListener('dragstart', (event) => {
+    const targetTodoId = event.target.dataset.todoid;
+    event.dataTransfer.setData('todoid', targetTodoId);
+  });
+
   this.node.addEventListener('dblclick', () => {
     const editModal = document.querySelector(`#todo_item_edit_modal_${todo.todoid}`);
     const overlay = document.querySelector('#overlay');
@@ -41,11 +46,6 @@ function TodoItem({ todo, category }) {
       text: todo.content,
       event: this.modalEditEvent
     }));
-    
-    this.node.addEventListener('dragstart', (event) => {
-      const targetTodoId = event.target.dataset.todoid;
-      event.dataTransfer.setData('todoid', targetTodoId);
-    });
   };
 
   this.render();
