@@ -1,4 +1,4 @@
-function Button({ id, className, title }, event) {
+function Button({ id, className, title, event }) {
   this.node = document.createElement('div');
   
   this.node.addEventListener('click', event);
@@ -12,6 +12,6 @@ function Button({ id, className, title }, event) {
   this.render();
 }
 
-const newButton = ({ id, className, title }, event) => new Button({ id, className, title }, event).node;
+const newButton = ({ id, className, title, event }) => new Button({ id, className, title, event }).node;
 
 export default newButton;

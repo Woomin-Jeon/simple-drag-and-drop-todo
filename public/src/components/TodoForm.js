@@ -15,7 +15,7 @@ function TodoForm({ category }) {
   
   this.render = () => {
     this.node.appendChild(Input({ id: `todo_input_${category}`, placeholder: '할 일을 입력해주세요'}));
-    this.node.appendChild(Button({ id: `todo_button_${category}`, title: '입력' }, this.addButtonEvent));
+    this.node.appendChild(Button({ id: `todo_button_${category}`, title: '입력', event: this.addButtonEvent }));
   };
 
   this.render();

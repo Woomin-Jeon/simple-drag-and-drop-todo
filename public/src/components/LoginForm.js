@@ -26,7 +26,7 @@ function LoginForm() {
   this.render = () => {
     this.node.appendChild(Input({ id: 'id_input', placeholder: '아이디를 입력해주세요' }));
     this.node.appendChild(Input({ id: 'password_input', placeholder: '비밀번호를 입력해주세요' }));
-    this.node.appendChild(Button({ id: 'login_button', title: '로그인' }, this.loginButtonEvent));
+    this.node.appendChild(Button({ id: 'login_button', title: '로그인', event: this.loginButtonEvent }));
   };
 
   this.render();
