@@ -1,5 +1,5 @@
 import { updator, store, updateRendering } from '../store.js';
-import { deleteTodo, moveTodo } from '../apis/todo.js';
+import { moveTodo } from '../apis/todo.js';
 import TodoForm from './TodoForm.js';
 import TodoItem from './TodoItem.js';
 
@@ -26,19 +26,10 @@ function TodoContainer({ category }) {
     `;
 
     const todoFormArea = document.querySelector(`#todo_form_${category}`);
-    todoFormArea.appendChild(TodoForm({ category }));
-
     const todoContainerItems = document.querySelector(`#todo_container_items_${category}`);
+
+    todoFormArea.appendChild(TodoForm({ category }));
     todos.map(todo => todoContainerItems.appendChild(TodoItem({ todo, category })));
-    todoContainerItems.addEventListener('click', async (event) => {
-      if (event.target.className !== 'todo_delete_button') {
-        return;
-      }
-      
-      const todoId = event.target.id;
-      await deleteTodo(todoId)
-      await updateRendering();
-    });
   };
 
   updator.push(this.render);
