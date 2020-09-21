@@ -22,7 +22,9 @@ function TodoItem({ todo, category }) {
   });
 
   this.deleteButtonEvent = () => {
-    this.node.addEventListener('click', async (event) => {
+    const deleteButton = document.querySelector(`#${todo.todoid}`);
+    
+    deleteButton.addEventListener('click', async (event) => {
       await deleteTodo(todo.todoid);
       await updateRendering();
     });
