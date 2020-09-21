@@ -8,6 +8,10 @@ export const deleteTodo = async (todoId) => {
   await axios.post('/todo/delete', { todoId });
 };
 
+export const updateTodo = async (todoId, content) => {
+  await axios.post('/todo/update', { todoId, content });
+};
+
 export const moveTodo = async (todoId, category) => {
   await axios.post('/todo/move', { todoId, category });
 };

@@ -9,12 +9,9 @@ function Modal({ id, title, text }, event) {
   this.node.classList.add('modal');
 
   this.render = () => {
-    this.node.innerHTML = `
-      <div>${title}</div>
-    `;
-
+    this.node.innerHTML = `<div>${title}</div>`;
     this.node.appendChild(Textarea({ id: `${id}_textarea`, text }));
-    this.node.appendChild(Button({ id: `${id}_button`, title: 'save' }));
+    this.node.appendChild(Button({ id: `${id}_button`, title: 'save' }, event));
   };
 
   modals.push(this.node);

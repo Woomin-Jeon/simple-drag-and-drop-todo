@@ -1,5 +1,7 @@
 import Button from './Button.js';
 import Modal from './Modal.js';
+import { updateTodo } from '../apis/todo.js';
+import { updateRendering } from '../store.js';
 
 function TodoItem({ todo, category }) {
   this.node = document.createElement('div');
@@ -14,10 +16,22 @@ function TodoItem({ todo, category }) {
     [editModal, overlay].forEach(dom => dom.classList.remove('hidden'));
   });
 
+  this.modalEditEvent = async () => {
+    const overlay = document.querySelector('#overlay');
+    overlay.classList.add('hidden');
+
+    const modalTextarea = document.querySelector(`#todo_item_edit_modal_${todo.todoid}_textarea`);
+    const updatedContent = modalTextarea.value;
+    const todoId = todo.todoid;
+
+    await updateTodo(todoId, updatedContent);
+    updateRendering();
+  };
+
   this.render = () => {
     this.node.innerHTML = `<span>${todo.content}</span>`;
-    this.node.appendChild(Button({ id: `todo_item_delete_button_${todo.todoid}`, className: 'todo_delete_button', title: '삭제' }))
-    this.node.appendChild(Modal({ id: `todo_item_edit_modal_${todo.todoid}`, title: 'Edit Note', text: todo.content }));
+    this.node.appendChild(Button({ id: todo.todoid, className: 'todo_delete_button', title: '삭제' }))
+    this.node.appendChild(Modal({ id: `todo_item_edit_modal_${todo.todoid}`, title: 'Edit Note', text: todo.content }, this.modalEditEvent));
     
     this.node.addEventListener('dragstart', (event) => {
       const targetTodoId = event.target.dataset.todoid;
