@@ -1,9 +1,34 @@
+body {
+  margin: 0;
+}
+
 .flex {
   display: flex;
 }
 
 .hidden {
   display: none;
+}
+
+.modal {
+  position: absolute;
+  border: 1px solid;
+  padding: 10px;
+  z-index: 2;
+  background-color: white;
+  width: 400px;
+  height: 300px;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+}
+
+.overlay {
+  position: absolute;
+  background-color: #2e2e2e7a;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
 .todo_container {
