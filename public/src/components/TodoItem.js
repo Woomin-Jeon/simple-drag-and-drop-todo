@@ -30,8 +30,17 @@ function TodoItem({ todo, category }) {
 
   this.render = () => {
     this.node.innerHTML = `<span>${todo.content}</span>`;
-    this.node.appendChild(Button({ id: todo.todoid, className: 'todo_delete_button', title: '삭제' }))
-    this.node.appendChild(Modal({ id: `todo_item_edit_modal_${todo.todoid}`, title: 'Edit Note', text: todo.content, event: this.modalEditEvent }));
+    this.node.appendChild(Button({
+      id: todo.todoid,
+      className: 'todo_delete_button',
+      title: '삭제'
+    }));
+    this.node.appendChild(Modal({
+      id: `todo_item_edit_modal_${todo.todoid}`,
+      title: 'Edit Note',
+      text: todo.content,
+      event: this.modalEditEvent
+    }));
     
     this.node.addEventListener('dragstart', (event) => {
       const targetTodoId = event.target.dataset.todoid;
