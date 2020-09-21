@@ -14,3 +14,6 @@ export const updator = [action.updateTodos];
 export const updateRendering = () =>
   updator.reduce((previousPromise, currentPromise) =>
     previousPromise.then(() => currentPromise()), Promise.resolve());
+
+export const modals = [];
+export const closeModals = () => modals.forEach(dom => dom.classList.add('hidden'));
