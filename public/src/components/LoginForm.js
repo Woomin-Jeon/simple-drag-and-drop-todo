@@ -1,5 +1,6 @@
 import Input from './Input.js';
 import Button from './Button.js';
+import TodoContainers from './TodoContainers.js';
 import { updateRendering } from '../store.js';
 import { signin } from '../apis/auth.js';
 
@@ -16,11 +17,12 @@ function LoginForm() {
       return;
     }
 
-    const todoContainers = document.querySelector('#todo_containers');
-    todoContainers.classList.remove('hidden');
-    todoContainers.classList.add('flex');
-    document.querySelector('#login_form').classList.add('hidden');
     await updateRendering();
+
+    const app = document.querySelector('#app');
+    app.appendChild(TodoContainers());
+  
+    document.querySelector('#login_form').classList.add('hidden');  
   }; 
 
   this.render = () => {
