@@ -14,26 +14,26 @@ function TodoItem({ todo, category }) {
     event.dataTransfer.setData('todoid', targetTodoId);
   });
 
-  this.node.addEventListener('dblclick', () => {
+  this.node.addEventListener('dblclick', (event) => {
+    if (event.target.className !== 'todo_container_item') {
+      return;
+    }
+
     const todoEditModal = document.querySelector(`#todo_item_edit_modal_${todo.todoid}`);
     const overlay = document.querySelector('#overlay');
     
     [todoEditModal, overlay].forEach(dom => dom.classList.remove('hidden'));
   });
 
-  this.deleteButtonEvent = () => {
-    const deleteButton = document.querySelector(`#${todo.todoid}`);
-    
-    deleteButton.addEventListener('click', async (event) => {
-      await deleteTodo(todo.todoid);
-      await updateRendering();
-    });
+  this.deleteButtonEvent = async (event) => {        
+    await deleteTodo(todo.todoid);
+    await updateRendering();
   };
 
   this.render = () => {
     this.node.innerHTML = `<span>${todo.content}</span>`;
     this.node.appendChild(Button({
-      id: todo.todoid,
+      id: `todo_delete_button_${todo.todoid}`,
       className: 'todo_delete_button',
       title: '삭제',
       event: this.deleteButtonEvent,
