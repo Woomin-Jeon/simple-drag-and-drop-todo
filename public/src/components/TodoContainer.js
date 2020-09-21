@@ -1,4 +1,4 @@
-import { updator, store, updateRendering } from '../store.js';
+import { store, updateRendering } from '../store.js';
 import { moveTodo } from '../apis/todo.js';
 import TodoForm from './TodoForm.js';
 import TodoItem from './TodoItem.js';
@@ -27,9 +27,9 @@ function TodoContainer({ category }) {
       <div id='todo_container_items_${category}'></div>
     `;
 
-    const todoContainerTitle = document.querySelector(`#todo_container_title_${category}`);
-    const todoFormArea = document.querySelector(`#todo_form_${category}`);
-    const todoContainerItems = document.querySelector(`#todo_container_items_${category}`);
+    const todoContainerTitle = this.node.querySelector(`#todo_container_title_${category}`);
+    const todoFormArea = this.node.querySelector(`#todo_form_${category}`);
+    const todoContainerItems = this.node.querySelector(`#todo_container_items_${category}`);
 
     todoContainerTitle.appendChild(TitleEditModal({ category }));
     todoFormArea.appendChild(TodoForm({ category }));
@@ -43,7 +43,7 @@ function TodoContainer({ category }) {
     });
   };
 
-  updator.push(this.render);
+  this.render();
 }
 
 const newTodoContainer = ({ category }) => new TodoContainer({ category }).node;
