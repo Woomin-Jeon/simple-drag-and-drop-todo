@@ -11,7 +11,7 @@ function TodoEditModal({ todo }) {
 
     overlay.classList.add('hidden');
     await updateTodo(todo.todoid, updatedContent);
-    updateRendering();
+    await updateRendering();
   };
 
   this.render = () => {

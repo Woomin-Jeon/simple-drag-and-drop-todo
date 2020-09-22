@@ -15,7 +15,7 @@ const getCategories = (next) => (userId) => new Promise((resolve, reject) => {
   });
 });
 
-const modifyCategoryName = (next) => (userId, category, newCategory) => {
+const modifyCategoryName = (next) => (userId, category, newCategory) => new Promise(resolve => {
   connectPool(async connection => {
     connection.beginTransaction();
 
@@ -64,7 +64,8 @@ const modifyCategoryName = (next) => (userId, category, newCategory) => {
 
     connection.commit();
     connection.release();
+    resolve(true);
   });
-};
+});
 
 module.exports = { modifyCategoryName, getCategories };
