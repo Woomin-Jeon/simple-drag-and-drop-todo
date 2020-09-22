@@ -16,12 +16,8 @@ function TodoItem({ todo, category }) {
   });
 
   this.node.addEventListener('dblclick', (event) => {
-    if (event.target.className !== 'todo_container_item') {
-      return;
-    }
-
     const todoEditModal = this.node.querySelector(`#todo_item_edit_modal_${todo.todoid}`);
-    const overlay = this.node.querySelector('#overlay');
+    const overlay = document.querySelector('#overlay');
     
     [todoEditModal, overlay].forEach(dom => dom.classList.remove('hidden'));
   });
