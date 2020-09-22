@@ -27,9 +27,9 @@ function TodoContainer({ category }) {
     const todos = store.todos.filter(todo => todo.category === category);
     
     this.node.innerHTML = `
-      <div class='flex'>
+      <div class='flex todo_container_header'>
         <div>
-          <span>${todos.length}</span>
+          <span class='todo_container_item_count'>${todos.length}</span>
           <span id='todo_container_title_${category}'>${category}</span>
         </div>
         <div id='todo_form_add_${category}'></div>
@@ -48,7 +48,7 @@ function TodoContainer({ category }) {
     todoFormArea.appendChild(TodoForm({ category }));
         todoFormAddButton.appendChild(Button({
       id: `todo_form_add_button_${category}`,
-      classList: `todo_form_add_button`,
+      className: `todo_form_add_button`,
       title: '+',
       event: this.todoAddButtonEvent,
     }));

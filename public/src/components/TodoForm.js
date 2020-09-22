@@ -36,17 +36,22 @@ function TodoForm({ category }) {
     this.node.appendChild(Textarea({
       id: `todo_input_${category}`,
       text: '',
+      className: 'todo_input_textarea',
       placeholder: 'Enter a note',
       event: this.textAreaEvent
     }));
-    this.node.appendChild(Button({
+    const child = document.createElement('div');
+    this.node.appendChild(child);
+    child.appendChild(Button({
       id: `todo_button_${category}`,
+      className: 'todo_input_button_confirm',
       title: 'Add',
       event: this.addButtonEvent,
       disabled: true,
     }));
-    this.node.appendChild(Button({
+    child.appendChild(Button({
       id: `todo_cancel_button_${category}`,
+      className: 'todo_input_button_cancel',
       title: 'Cancel',
       event: this.cancelButtonEvent
     }));
