@@ -1,16 +1,21 @@
 import axios from './apis/customAxios.js';
 
 export const store = {
-  todos: []
+  todos: [],
+  categories: []
 };
 
 export const action = {
   async updateTodos(todos) {
     store.todos = await axios.get('/todo');
+  },
+  async updateCategory() {
+    const data = await axios.get('/category');
+    store.categories = [...data.categories];
   }
 };
 
-export const updator = [action.updateTodos];
+export const updator = [action.updateCategory, action.updateTodos];
 export const updateRendering = () =>
   updator.reduce((previousPromise, currentPromise) =>
     previousPromise.then(() => currentPromise()), Promise.resolve());

@@ -1,5 +1,6 @@
-import { updator, store, updateRendering } from '../store.js';
+import { store, updateRendering } from '../store.js';
 import { moveTodo } from '../apis/todo.js';
+import Button from './Button.js';
 import TodoForm from './TodoForm.js';
 import TodoItem from './TodoItem.js';
 import TitleEditModal from './TitleEditModal.js';
@@ -17,22 +18,40 @@ function TodoContainer({ category }) {
     await updateRendering();
   });
 
+  this.todoAddButtonEvent = () => {
+    const todoForm = this.node.querySelector(`#todo_form_${category}`);
+    todoForm.classList.remove('hidden');
+  }
+
   this.render = () => {
     const todos = store.todos.filter(todo => todo.category === category);
     
     this.node.innerHTML = `
-      <div>${todos.length}</div>
-      <div id='todo_container_title_${category}'>${category}</div>
-      <div id='todo_form_${category}'></div>
+      <div class='flex todo_container_header'>
+        <div>
+          <span class='todo_container_item_count'>${todos.length}</span>
+          <span id='todo_container_title_${category}'>${category}</span>
+        </div>
+        <div id='todo_form_add_${category}'></div>
+      </div>
+      <div id='todo_form_${category}_area'></div>
       <div id='todo_container_items_${category}'></div>
     `;
 
-    const todoContainerTitle = document.querySelector(`#todo_container_title_${category}`);
-    const todoFormArea = document.querySelector(`#todo_form_${category}`);
-    const todoContainerItems = document.querySelector(`#todo_container_items_${category}`);
+    const todoContainerTitle = this.node.querySelector(`#todo_container_title_${category}`);
+    const todoFormAddButton = this.node.querySelector(`#todo_form_add_${category}`);
+    const todoFormArea = this.node.querySelector(`#todo_form_${category}_area`);
+    const todoContainerItems = this.node.querySelector(`#todo_container_items_${category}`);
 
     todoContainerTitle.appendChild(TitleEditModal({ category }));
+
     todoFormArea.appendChild(TodoForm({ category }));
+        todoFormAddButton.appendChild(Button({
+      id: `todo_form_add_button_${category}`,
+      className: `todo_form_add_button`,
+      title: '+',
+      event: this.todoAddButtonEvent,
+    }));
     todos.map(todo => todoContainerItems.appendChild(TodoItem({ todo, category })));
 
     todoContainerTitle.addEventListener('dblclick', () => {
@@ -43,7 +62,7 @@ function TodoContainer({ category }) {
     });
   };
 
-  updator.push(this.render);
+  this.render();
 }
 
 const newTodoContainer = ({ category }) => new TodoContainer({ category }).node;

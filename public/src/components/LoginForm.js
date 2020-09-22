@@ -1,5 +1,7 @@
 import Input from './Input.js';
 import Button from './Button.js';
+import Header from './Header.js';
+import TodoContainers from './TodoContainers.js';
 import { updateRendering } from '../store.js';
 import { signin } from '../apis/auth.js';
 
@@ -8,19 +10,21 @@ function LoginForm() {
   this.node.setAttribute('id', 'login_form');
   
   this.loginButtonEvent = async () => {
-    const id = document.querySelector('#id_input').value;
-    const password = document.querySelector('#password_input').value;    
+    const id = this.node.querySelector('#id_input').value;
+    const password = this.node.querySelector('#password_input').value;    
     const response = await signin(id, password);
     
     if (response.status !== 200) {
       return;
     }
 
-    const todoContainers = document.querySelector('#todo_containers');
-    todoContainers.classList.remove('hidden');
-    todoContainers.classList.add('flex');
-    document.querySelector('#login_form').classList.add('hidden');
     await updateRendering();
+
+    const app = document.querySelector('#app');
+    app.appendChild(Header());
+    app.appendChild(TodoContainers());
+  
+    document.querySelector('#login_form').classList.add('hidden');  
   }; 
 
   this.render = () => {
