@@ -37,8 +37,10 @@ function TodoItem({ todo, category }) {
   };
 
   this.render = () => {
-    this.node.innerHTML = `<span>${todo.content}</span>`;
-    this.node.appendChild(Button({
+    this.node.innerHTML = `<div>${todo.content}</div>`;
+    const div = document.createElement('div');
+    this.node.appendChild(div);
+    div.appendChild(Button({
       id: `todo_delete_button_${todo.todoid}`,
       className: 'todo_delete_button',
       title: 'x',

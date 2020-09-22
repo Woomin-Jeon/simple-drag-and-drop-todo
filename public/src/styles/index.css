@@ -84,9 +84,11 @@ body {
 }
 
 .todo_container_item {
-  border: 1px solid;
-  padding: 5px;
+  padding: 16px;
   margin: 5px;
+  background-color: white;
+  border-radius: 10px;
+  height: max-content;
 }
 
 .todo_container_item_count {
@@ -138,4 +140,13 @@ body {
   border-radius: 5px;
   background: white;
   border: 1px solid;
+  margin-bottom: 16px;
+}
+
+.todo_delete_button {
+  border: none;
+  font-size: 16px;
+  background-color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
