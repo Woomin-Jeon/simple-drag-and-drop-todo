@@ -24,7 +24,6 @@ function TodoForm({ category }) {
     const addButton = document.querySelector(`#todo_button_${category}`)
     const textArea = document.querySelector(`#todo_input_${category}`);
     
-    console.log(textArea.value.trim().length);
     if (textArea.value.trim().length === 0) {
       addButton.setAttribute('disabled', 'true');
       return;
