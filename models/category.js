@@ -19,51 +19,46 @@ const modifyCategoryName = (next) => (userId, category, newCategory) => new Prom
   connectPool(async connection => {
     connection.beginTransaction();
 
-    await new Promise((resolve, reject) => {
-      const query = `UPDATE todo SET category=? where category=?`;
-      connection.query(query, [newCategory, category], (error, rows, fields) => {
-        checkError(error, reject);
-        resolve(true);
+    try {
+      await new Promise((resolve, reject) => {
+        const query = `UPDATE todo SET category=? where category=? and userid=?`;
+        connection.query(query, [newCategory, category, userId], (error, rows, fields) => {
+          checkError(error, reject);
+          resolve(true);
+        });
       });
-    }).catch((error) => {
-      connection.rollback();
-      connection.release();
-      next(error);
-    });
 
-    const categoryElement = await new Promise((resolve, reject) => {
-      const query = `SELECT element FROM category where userid=?`;
-      connection.query(query, [userId], (error, rows, fields) => {
-        checkError(error, reject);
-        const [data] = rows;
-        resolve(data.element);
+      const categoryElement = await new Promise((resolve, reject) => {
+        const query = `SELECT element FROM category where userid=?`;
+        connection.query(query, [userId], (error, rows, fields) => {
+          checkError(error, reject);
+          const [data] = rows;
+          resolve(data.element);
+        });
       });
-    }).catch((error) => {
-      connection.rollback();
-      connection.release();
-      next(error);
-    });
 
-    const categories = categoryElement.split(';');
-    const targetIndex = categories.indexOf(category);
-    categories[targetIndex] = newCategory;
+      const categories = categoryElement.split(';');
+      const targetIndex = categories.indexOf(category);
+      categories[targetIndex] = newCategory;
 
-    const modifiedCategoryElement = categories.join(';');
+      const modifiedCategoryElement = categories.join(';');
 
-    await new Promise((resolve, reject) => {
-      const query = `UPDATE category SET element=? where userid=?`;
-      connection.query(query, [modifiedCategoryElement, userId], (error, rows, fields) => {
-        checkError(error, reject);
-        resolve(true);
+      await new Promise((resolve, reject) => {
+        const query = `UPDATE category SET element=? where userid=?`;
+        connection.query(query, [modifiedCategoryElement, userId], (error, rows, fields) => {
+          checkError(error, reject);
+          resolve(true);
+        });
       });
-    }).catch((error) => {
-      connection.rollback();
-      connection.release();
-      next(error);
-    });
 
-    connection.commit();
-    connection.release();
+      connection.commit();
+    } catch (error) {
+      connection.rollback();
+      next(error);
+    } finally {
+      connection.release();
+    }
+
     resolve(true);
   });
 });
