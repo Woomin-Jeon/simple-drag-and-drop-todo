@@ -6,8 +6,8 @@ function TitleEditModal({ category }) {
   this.node = document.createElement('div');
 
   this.titleEditEvent = async () => {
-    const overlay = document.querySelector('#overlay');
-    const updatedTitle = document.querySelector(`#todo_container_title_edit_modal_${category}_textarea`).value;
+    const overlay = this.node.querySelector('#overlay');
+    const updatedTitle = this.node.querySelector(`#todo_container_title_edit_modal_${category}_textarea`).value;
     
     overlay.classList.add('hidden');
     await modifyCategoryName(category, updatedTitle);

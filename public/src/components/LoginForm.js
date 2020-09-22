@@ -9,8 +9,8 @@ function LoginForm() {
   this.node.setAttribute('id', 'login_form');
   
   this.loginButtonEvent = async () => {
-    const id = document.querySelector('#id_input').value;
-    const password = document.querySelector('#password_input').value;    
+    const id = this.node.querySelector('#id_input').value;
+    const password = this.node.querySelector('#password_input').value;    
     const response = await signin(id, password);
     
     if (response.status !== 200) {

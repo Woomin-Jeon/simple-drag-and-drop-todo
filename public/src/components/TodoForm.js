@@ -8,7 +8,7 @@ function TodoForm({ category }) {
   this.node.setAttribute('id', 'todo_form');
   
   this.addButtonEvent = async () => {
-    const content = document.querySelector(`#todo_input_${category}`).value;
+    const content = this.node.querySelector(`#todo_input_${category}`).value;
     await addTodo(content, category);
     await updateRendering();
   };

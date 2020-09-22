@@ -7,7 +7,7 @@ function TodoEditModal({ todo }) {
   
   this.modalEditEvent = async () => {
     const overlay = document.querySelector('#overlay');
-    const updatedContent = document.querySelector(`#todo_item_edit_modal_${todo.todoid}_textarea`).value;
+    const updatedContent = this.node.querySelector(`#todo_item_edit_modal_${todo.todoid}_textarea`).value;
 
     overlay.classList.add('hidden');
     await updateTodo(todo.todoid, updatedContent);

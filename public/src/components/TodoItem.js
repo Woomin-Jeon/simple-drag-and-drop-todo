@@ -19,8 +19,8 @@ function TodoItem({ todo, category }) {
       return;
     }
 
-    const todoEditModal = document.querySelector(`#todo_item_edit_modal_${todo.todoid}`);
-    const overlay = document.querySelector('#overlay');
+    const todoEditModal = this.node.querySelector(`#todo_item_edit_modal_${todo.todoid}`);
+    const overlay = this.node.querySelector('#overlay');
     
     [todoEditModal, overlay].forEach(dom => dom.classList.remove('hidden'));
   });
