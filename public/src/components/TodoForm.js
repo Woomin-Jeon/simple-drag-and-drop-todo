@@ -1,4 +1,4 @@
-import Input from './Input.js';
+import Textarea from './Textarea.js';
 import Button from './Button.js';
 import { updateRendering } from '../store.js';
 import { addTodo } from '../apis/todo.js';
@@ -14,7 +14,7 @@ function TodoForm({ category }) {
   };
   
   this.render = () => {
-    this.node.appendChild(Input({ id: `todo_input_${category}`, placeholder: '할 일을 입력해주세요'}));
+    this.node.appendChild(Textarea({ id: `todo_input_${category}`, text: '', placeholder: 'Enter a note' }));
     this.node.appendChild(Button({ id: `todo_button_${category}`, title: '입력', event: this.addButtonEvent }));
   };
 
