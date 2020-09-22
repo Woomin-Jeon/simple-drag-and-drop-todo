@@ -10,6 +10,19 @@ body {
   display: none;
 }
 
+.popup {
+  position: absolute;
+  border: 1px solid;
+  padding: 23px 30px 30px 30px;
+  background-color: white;
+  width: 400px;
+  height: 100px;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+}
+
 .modal {
   position: absolute;
   border: 1px solid;
