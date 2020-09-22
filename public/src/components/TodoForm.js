@@ -20,10 +20,37 @@ function TodoForm({ category }) {
     textArea.value = '';
   };
   
+  this.textAreaEvent = () => {
+    const addButton = document.querySelector(`#todo_button_${category}`)
+    const textArea = document.querySelector(`#todo_input_${category}`);
+    
+    console.log(textArea.value.trim().length);
+    if (textArea.value.trim().length === 0) {
+      addButton.setAttribute('disabled', 'true');
+      return;
+    }
+
+    addButton.removeAttribute('disabled');
+  }
+
   this.render = () => {
-    this.node.appendChild(Textarea({ id: `todo_input_${category}`, text: '', placeholder: 'Enter a note' }));
-    this.node.appendChild(Button({ id: `todo_button_${category}`, title: 'Add', event: this.addButtonEvent }));
-    this.node.appendChild(Button({ id: `todo_cancel_button_${category}`, title: 'Cancel', event: this.cancelButtonEvent }));
+    this.node.appendChild(Textarea({
+      id: `todo_input_${category}`,
+      text: '',
+      placeholder: 'Enter a note',
+      event: this.textAreaEvent
+    }));
+    this.node.appendChild(Button({
+      id: `todo_button_${category}`,
+      title: 'Add',
+      event: this.addButtonEvent,
+      disabled: true,
+    }));
+    this.node.appendChild(Button({
+      id: `todo_cancel_button_${category}`,
+      title: 'Cancel',
+      event: this.cancelButtonEvent
+    }));
   };
 
   this.render();
