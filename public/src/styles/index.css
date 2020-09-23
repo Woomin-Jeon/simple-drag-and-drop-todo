@@ -91,6 +91,7 @@ body {
   height: max-content;
   display: flex;
   justify-content: space-between;
+  word-break: break-all;
 }
 
 .todo_container_item_count {
