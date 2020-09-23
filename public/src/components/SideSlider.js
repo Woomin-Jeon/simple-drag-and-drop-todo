@@ -16,8 +16,7 @@ function SideSlider() {
     className: 'side_slider_close_button',
     title: 'x',
     event: this.closeSliderButtonEvent,
-  }));
-  
+  }));  
 }
 
 const newSideSlider = () => new SideSlider().node;
