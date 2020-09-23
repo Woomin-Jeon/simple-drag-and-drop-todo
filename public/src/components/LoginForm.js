@@ -2,6 +2,7 @@ import Input from './Input.js';
 import Button from './Button.js';
 import Header from './Header.js';
 import TodoContainers from './TodoContainers.js';
+import SideSlider from './SideSlider.js';
 import { updateRendering } from '../store.js';
 import { signin } from '../apis/auth.js';
 
@@ -21,6 +22,7 @@ function LoginForm() {
     await updateRendering();
 
     const app = document.querySelector('#app');
+    app.appendChild(SideSlider());
     app.appendChild(Header());
     app.appendChild(TodoContainers());
   

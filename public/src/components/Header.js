@@ -6,8 +6,9 @@ function Header() {
   this.node.classList.add('header');
 
   this.menuButtonEvent = () => {
-    //TODO: 아래 코드 제거 및 이벤트 구현
-    alert('menu button clicked');
+    const slider = document.querySelector('#side_slider');
+    slider.classList.remove('hidden');
+    slider.style.animationName = 'slider-open';
   }
 
   this.node.innerHTML = `<div>TODO</div>`;

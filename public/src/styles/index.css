@@ -150,3 +150,25 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
+
+.slider {
+  position: absolute;
+  width: 29.6%;
+  height: 100%;
+  left: 100%;
+  background-color: #e7e7e7;
+  animation-name: slider;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes slider-open {
+  0% { left: 100% }
+  100% { left: 70.4% }
+}
+
+@keyframes slider-close {
+  0% { left: 70.4% }
+  100% { left: 100% }
+}
