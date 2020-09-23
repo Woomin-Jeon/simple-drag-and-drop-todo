@@ -89,6 +89,8 @@ body {
   background-color: white;
   border-radius: 10px;
   height: max-content;
+  display: flex;
+  justify-content: space-between;
 }
 
 .todo_container_item_count {
@@ -153,11 +155,7 @@ body {
 
 .slider {
   position: absolute;
-<<<<<<< HEAD
-  width: 300px;
-=======
   width: 29.6%;
->>>>>>> feature/menu-slider
   height: 100%;
   left: 100%;
   background-color: #e7e7e7;

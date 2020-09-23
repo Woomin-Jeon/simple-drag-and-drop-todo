@@ -3,7 +3,12 @@ import { updateTodo } from '../apis/todo.js';
 import { updateRendering } from '../store.js';
 
 function TodoEditModal({ todo }) {
-  this.node = document.createElement('div');
+  this.node = Modal({
+    id: `todo_item_edit_modal_${todo.todoid}`,
+    title: 'Edit Note',
+    text: todo.content,
+    event: this.modalEditEvent
+  });
   
   this.modalEditEvent = async () => {
     const overlay = document.querySelector('#overlay');
@@ -13,17 +18,6 @@ function TodoEditModal({ todo }) {
     await updateTodo(todo.todoid, updatedContent);
     await updateRendering();
   };
-
-  this.render = () => {
-    this.node.appendChild(Modal({
-      id: `todo_item_edit_modal_${todo.todoid}`,
-      title: 'Edit Note',
-      text: todo.content,
-      event: this.modalEditEvent
-    }));
-  }
-
-  this.render();
 }
 
 const newTodoEditModal = ({ todo }) => new TodoEditModal({ todo }).node;
