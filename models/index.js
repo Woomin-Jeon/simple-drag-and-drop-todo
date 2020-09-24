@@ -11,7 +11,9 @@ const pool = mysql.createPool({
 });
 
 const connectPool = (queryCallback) => {
-  pool.getConnection((err, connection) => {
+  new Promise(resolve => {
+    pool.getConnection((error, connection) => resolve(connection));
+  }).then(connection => {
     queryCallback(connection);
   });
 };
