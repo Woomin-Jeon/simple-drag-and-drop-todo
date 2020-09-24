@@ -6,11 +6,11 @@ function Modal({ title, text, event }) {
   this.node.classList.add('hidden');
   this.node.classList.add('modal');
 
-  this.node.textarea = Textarea({ text });
-  this.node.button = Button({ title: 'save', event });
+  this.node.textarea = Textarea({ text, className: 'modal_textarea' });
+  this.node.button = Button({ title: 'save', event, className: 'modal_button' });
 
   this.render = () => {
-    this.node.innerHTML = `<div>${title}</div>`;
+    this.node.innerHTML = `<div class='modal_title'>${title}</div>`;
     this.node.appendChild(this.node.textarea);
     this.node.appendChild(this.node.button);
   };

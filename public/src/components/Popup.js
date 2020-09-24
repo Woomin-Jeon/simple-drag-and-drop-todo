@@ -10,14 +10,14 @@ function Popup({ question, event }) {
   };
 
   this.render = () => {
-    this.node.innerHTML = `<div>${question}</div>`;
+    this.node.innerHTML = `<div class='popup_question'>${question}</div>`;
     this.node.appendChild(Button({
-      class: 'popup_button',
+      className: 'popup_button_cancel',
       title: '취소',
       event: this.closeButtonEvent,
     }));
     this.node.appendChild(Button({
-      class: 'popup_button',
+      className: 'popup_button_confirm',
       title: '확인',
       event,
     }));
