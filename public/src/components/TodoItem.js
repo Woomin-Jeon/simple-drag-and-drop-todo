@@ -3,6 +3,7 @@ import TodoEditModal from './TodoEditModal.js';
 import Popup from './Popup.js';
 import { deleteTodo } from '../apis/todo.js';
 import { updateRendering } from '../store.js';
+import dom from '../domHelper.js';
 
 function TodoItem({ todo, category }) {
   this.node = document.createElement('div');
@@ -16,9 +17,7 @@ function TodoItem({ todo, category }) {
   });
 
   this.node.addEventListener('dblclick', (event) => {
-    const overlay = document.querySelector('#overlay');
-    
-    [this.todoEditModal, overlay].forEach(dom => dom.classList.remove('hidden'));
+    [this.todoEditModal, dom.overlay].forEach(dom => dom.classList.remove('hidden'));
   });
 
   this.openDeletePopupEvent = () => {

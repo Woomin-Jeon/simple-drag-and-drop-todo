@@ -1,8 +1,8 @@
 import Button from './Button.js';
+import dom from '../domHelper.js';
 
 function SideSlider() {
   this.node = document.createElement('div');
-  this.node.setAttribute('id', 'side_slider');
   this.node.classList.add('slider');
   this.node.classList.add('hidden');
   
@@ -15,7 +15,9 @@ function SideSlider() {
     className: 'side_slider_close_button',
     title: 'x',
     event: this.closeSliderButtonEvent,
-  }));  
+  }));
+
+  dom['slider'] = this.node;
 }
 
 const newSideSlider = () => new SideSlider().node;

@@ -1,8 +1,8 @@
 import { closeModals } from '../store.js';
+import dom from '../domHelper.js';
 
 function Overlay() {
   this.node = document.createElement('div');
-  this.node.setAttribute('id', 'overlay');
   this.node.classList.add('overlay');
   this.node.classList.add('hidden');
 
@@ -10,6 +10,8 @@ function Overlay() {
     closeModals();
     this.node.classList.add('hidden');
   });
+
+  dom['overlay'] = this.node;
 }
 
 const newOverlay = () => new Overlay().node;

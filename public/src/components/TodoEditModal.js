@@ -1,13 +1,13 @@
 import Modal from './Modal.js';
 import { updateTodo } from '../apis/todo.js';
 import { updateRendering } from '../store.js';
+import dom from '../domHelper.js';
 
 function TodoEditModal({ todo }) {
   this.modalEditEvent = async () => {
-    const overlay = document.querySelector('#overlay');
     const updatedContent = this.node.textarea.value;
 
-    overlay.classList.add('hidden');
+    dom.overlay.classList.add('hidden');
     await updateTodo(todo.todoid, updatedContent);
     await updateRendering();
   };

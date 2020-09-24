@@ -1,13 +1,13 @@
 import Modal from './Modal.js';
 import { modifyCategoryName } from '../apis/category.js';
 import { updateRendering } from '../store.js';
+import dom from '../domHelper.js';
 
 function TitleEditModal({ category }) {
   this.titleEditEvent = async () => {
-    const overlay = document.querySelector('#overlay');
     const updatedTitle = this.node.textarea.value;
     
-    overlay.classList.add('hidden');
+    dom.overlay.classList.add('hidden');
     await modifyCategoryName(category, updatedTitle);
     await updateRendering();
   };
