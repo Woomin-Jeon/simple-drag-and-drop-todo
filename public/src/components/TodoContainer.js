@@ -19,9 +19,17 @@ function TodoContainer({ category }) {
   });
 
   this.todoAddButtonEvent = () => {
-    const todoForm = this.node.querySelector(`#todo_form_${category}`);
-    todoForm.classList.remove('hidden');
+    this.todoForm.classList.remove('hidden');
   }
+
+  this.titleEditModal = TitleEditModal({ category })
+  this.todoForm = TodoForm({ category });
+  this.todoFormButton = Button({
+    id: `todo_form_add_button_${category}`,
+    className: `todo_form_add_button`,
+    title: '+',
+    event: this.todoAddButtonEvent.bind(this),
+  });
 
   this.render = () => {
     const todos = store.todos.filter(todo => todo.category === category);
@@ -43,22 +51,15 @@ function TodoContainer({ category }) {
     const todoFormArea = this.node.querySelector(`#todo_form_${category}_area`);
     const todoContainerItems = this.node.querySelector(`#todo_container_items_${category}`);
 
-    todoContainerTitle.appendChild(TitleEditModal({ category }));
-
-    todoFormArea.appendChild(TodoForm({ category }));
-        todoFormAddButton.appendChild(Button({
-      id: `todo_form_add_button_${category}`,
-      className: `todo_form_add_button`,
-      title: '+',
-      event: this.todoAddButtonEvent,
-    }));
+    todoContainerTitle.appendChild(this.titleEditModal);
+    todoFormArea.appendChild(this.todoForm);
+    todoFormAddButton.appendChild(this.todoFormButton);
     todos.map(todo => todoContainerItems.appendChild(TodoItem({ todo, category })));
 
     todoContainerTitle.addEventListener('dblclick', () => {
-      const titleEditModal = document.querySelector(`#todo_container_title_edit_modal_${category}`);
       const overlay = document.querySelector('#overlay');
       
-      [titleEditModal, overlay].forEach(dom => dom.classList.remove('hidden'));
+      [this.titleEditModal, overlay].forEach(dom => dom.classList.remove('hidden'));
     });
   };
 

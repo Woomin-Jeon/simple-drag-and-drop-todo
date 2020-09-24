@@ -9,52 +9,51 @@ function TodoForm({ category }) {
   this.node.setAttribute('id', `todo_form_${category}`);
 
   this.addButtonEvent = async () => {
-    const content = this.node.querySelector(`#todo_input_${category}`).value;
-    await addTodo(content, category);
+    await addTodo(this.textarea.value, category);
     await updateRendering();
   };
 
   this.cancelButtonEvent = () => {
     this.node.classList.add('hidden');
-    const textArea = document.querySelector(`#todo_input_${category}`);
-    textArea.value = '';
+    this.textArea.value = '';
   };
   
   this.textAreaEvent = () => {
-    const addButton = document.querySelector(`#todo_button_${category}`)
-    const textArea = document.querySelector(`#todo_input_${category}`);
-    
-    if (textArea.value.trim().length === 0) {
-      addButton.setAttribute('disabled', 'true');
+    if (this.textarea.value.trim().length === 0) {
+      this.addButton.setAttribute('disabled', 'true');
       return;
     }
 
-    addButton.removeAttribute('disabled');
+    this.addButton.removeAttribute('disabled');
   }
 
+  this.textarea = Textarea({
+    id: `todo_input_${category}`,
+    text: '',
+    className: 'todo_input_textarea',
+    placeholder: 'Enter a note',
+    event: this.textAreaEvent.bind(this)
+  });
+  this.addButton = Button({
+    id: `todo_button_${category}`,
+    className: 'todo_input_button_confirm',
+    title: 'Add',
+    event: this.addButtonEvent.bind(this),
+    disabled: true,
+  });
+  this.cancelButton = Button({
+    id: `todo_cancel_button_${category}`,
+    className: 'todo_input_button_cancel',
+    title: 'Cancel',
+    event: this.cancelButtonEvent.bind(this)
+  });
+
   this.render = () => {
-    this.node.appendChild(Textarea({
-      id: `todo_input_${category}`,
-      text: '',
-      className: 'todo_input_textarea',
-      placeholder: 'Enter a note',
-      event: this.textAreaEvent
-    }));
+    this.node.appendChild(this.textarea);
     const child = document.createElement('div');
     this.node.appendChild(child);
-    child.appendChild(Button({
-      id: `todo_button_${category}`,
-      className: 'todo_input_button_confirm',
-      title: 'Add',
-      event: this.addButtonEvent,
-      disabled: true,
-    }));
-    child.appendChild(Button({
-      id: `todo_cancel_button_${category}`,
-      className: 'todo_input_button_cancel',
-      title: 'Cancel',
-      event: this.cancelButtonEvent
-    }));
+    child.appendChild(this.addButton);
+    child.appendChild(this.cancelButton);
   };
 
   this.render();

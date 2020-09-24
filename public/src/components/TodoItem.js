@@ -16,15 +16,13 @@ function TodoItem({ todo, category }) {
   });
 
   this.node.addEventListener('dblclick', (event) => {
-    const todoEditModal = this.node.querySelector(`#todo_item_edit_modal_${todo.todoid}`);
     const overlay = document.querySelector('#overlay');
     
-    [todoEditModal, overlay].forEach(dom => dom.classList.remove('hidden'));
+    [this.todoEditModal, overlay].forEach(dom => dom.classList.remove('hidden'));
   });
 
   this.openDeletePopupEvent = () => {
-    const popup = this.node.querySelector(`#todo_item_popup_${todo.todoid}`);
-    popup.classList.remove('hidden');
+    this.popup.classList.remove('hidden');
   }
 
   this.deleteButtonEvent = async (event) => {        
@@ -32,22 +30,25 @@ function TodoItem({ todo, category }) {
     await updateRendering();
   };
 
+  this.todoEditModal = TodoEditModal({ todo });
+  this.popup = Popup({
+    question: '선택하신 카드를 삭제 하시겠습니까?',
+    event: this.deleteButtonEvent.bind(this),
+  });
+  this.deleteButton = Button({
+    id: `todo_delete_button_${todo.todoid}`,
+    className: 'todo_delete_button',
+    title: 'x',
+    event: this.openDeletePopupEvent.bind(this),
+  });
+
   this.render = () => {
     this.node.innerHTML = `<div>${todo.content}</div>`;
     const div = document.createElement('div');
     this.node.appendChild(div);
-    div.appendChild(Button({
-      id: `todo_delete_button_${todo.todoid}`,
-      className: 'todo_delete_button',
-      title: 'x',
-      event: this.openDeletePopupEvent,
-    }));
-    this.node.appendChild(TodoEditModal({ todo }));
-    this.node.appendChild(Popup({
-      id: `todo_item_popup_${todo.todoid}`,
-      question: '선택하신 카드를 삭제 하시겠습니까?',
-      event: this.deleteButtonEvent,
-    }));
+    div.appendChild(this.deleteButton);
+    this.node.appendChild(this.todoEditModal);
+    this.node.appendChild(this.popup);
   };
 
   this.render();

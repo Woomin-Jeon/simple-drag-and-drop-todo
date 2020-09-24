@@ -1,10 +1,9 @@
 import Button from './Button.js';
 
-function Popup({ id, question, event }) {
+function Popup({ question, event }) {
   this.node = document.createElement('div');
   this.node.classList.add('popup');
   this.node.classList.add('hidden');
-  this.node.setAttribute('id', id);
 
   this.closeButtonEvent = () => {
     this.node.classList.add('hidden');
@@ -29,6 +28,6 @@ function Popup({ id, question, event }) {
   this.render();
 }
 
-const newPopup = ({ id, question, event }) => new Popup({ id, question, event }).node;
+const newPopup = ({ question, event }) => new Popup({ question, event }).node;
 
 export default newPopup;
