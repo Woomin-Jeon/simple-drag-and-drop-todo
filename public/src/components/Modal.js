@@ -1,6 +1,5 @@
 import Button from  './Button.js';
 import Textarea from  './Textarea.js';
-import { modals } from '../store.js';
 
 function Modal({ title, text, event }) {
   this.node = document.createElement('div');
@@ -16,7 +15,6 @@ function Modal({ title, text, event }) {
     this.node.appendChild(this.node.button);
   };
 
-  modals.push(this.node);
   this.render();
 }
 

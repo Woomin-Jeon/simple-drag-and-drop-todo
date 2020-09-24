@@ -1,4 +1,4 @@
-import { closeModals } from '../store.js';
+import { util } from '../store.js';
 import dom from '../domHelper.js';
 
 function Overlay() {
@@ -7,8 +7,7 @@ function Overlay() {
   this.node.classList.add('hidden');
 
   this.node.addEventListener('click', () => {
-    closeModals();
-    this.node.classList.add('hidden');
+    util.closeModal();
   });
 
   dom['overlay'] = this.node;

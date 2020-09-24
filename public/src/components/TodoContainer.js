@@ -1,4 +1,4 @@
-import { store, updateRendering } from '../store.js';
+import { store, updateRendering, action, util } from '../store.js';
 import { moveTodo } from '../apis/todo.js';
 import dom from '../domHelper.js';
 import Button from './Button.js';
@@ -57,7 +57,8 @@ function TodoContainer({ category }) {
     todos.map(todo => todoContainerItems.appendChild(TodoItem({ todo, category })));
 
     todoContainerTitle.addEventListener('dblclick', () => {
-      [this.titleEditModal, dom.overlay].forEach(dom => dom.classList.remove('hidden'));
+      action.setTargetModal(this.titleEditModal);
+      util.openModal();
     });
   };
 
