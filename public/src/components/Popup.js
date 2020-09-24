@@ -12,13 +12,11 @@ function Popup({ question, event }) {
   this.render = () => {
     this.node.innerHTML = `<div>${question}</div>`;
     this.node.appendChild(Button({
-      id: 'popup_close_button',
       class: 'popup_button',
       title: '취소',
       event: this.closeButtonEvent,
     }));
     this.node.appendChild(Button({
-      id: 'popup_confirm_button',
       class: 'popup_button',
       title: '확인',
       event,

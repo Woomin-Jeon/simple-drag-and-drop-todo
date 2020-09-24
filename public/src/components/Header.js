@@ -13,7 +13,6 @@ function Header() {
 
   this.node.innerHTML = `<div>TODO</div>`;
   this.node.appendChild(Button({
-    id: 'header_menu_button',
     className: 'header_menu',
     title: 'menu',
     event: this.menuButtonEvent

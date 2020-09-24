@@ -36,7 +36,6 @@ function TodoItem({ todo, category }) {
     event: this.deleteButtonEvent.bind(this),
   });
   this.deleteButton = Button({
-    id: `todo_delete_button_${todo.todoid}`,
     className: 'todo_delete_button',
     title: 'x',
     event: this.openDeletePopupEvent.bind(this),

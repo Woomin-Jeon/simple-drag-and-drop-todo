@@ -8,12 +8,9 @@ import { signin } from '../apis/auth.js';
 
 function LoginForm() {
   this.node = document.createElement('div');
-  this.node.setAttribute('id', 'login_form');
 
   this.loginButtonEvent = async () => {
-    const id = this.idInput.value;
-    const password = this.passwordInput.value;    
-    const response = await signin(id, password);
+    const response = await signin(this.idInput.value, this.passwordInput.value);
     
     if (response.status !== 200) {
       return;
@@ -29,9 +26,9 @@ function LoginForm() {
     this.node.classList.add('hidden');  
   };
 
-  this.idInput = Input({ id: 'id_input', placeholder: '아이디를 입력해주세요' });
-  this.passwordInput = Input({ id: 'password_input', placeholder: '비밀번호를 입력해주세요' });
-  this.loginButton = Button({ id: 'login_button', title: '로그인', event: this.loginButtonEvent.bind(this) });
+  this.idInput = Input({ placeholder: '아이디를 입력해주세요' });
+  this.passwordInput = Input({ placeholder: '비밀번호를 입력해주세요' });
+  this.loginButton = Button({ title: '로그인', event: this.loginButtonEvent.bind(this) });
 
   this.render = () => {
     this.node.appendChild(this.idInput);

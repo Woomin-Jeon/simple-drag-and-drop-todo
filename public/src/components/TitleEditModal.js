@@ -13,7 +13,6 @@ function TitleEditModal({ category }) {
   };
 
   this.node = Modal({
-    id: `todo_container_title_edit_modal_${category}`,
     title: `Edit Title`,
     text: category,
     event: this.titleEditEvent.bind(this),

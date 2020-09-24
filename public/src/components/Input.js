@@ -1,10 +1,9 @@
-function Input({ id, placeholder }) {
+function Input({ placeholder }) {
   this.node = document.createElement('input');
-  this.node.setAttribute('id', id);
   this.node.setAttribute('type', 'text');
   this.node.setAttribute('placeholder', placeholder);
 }
 
-const newInput = ({ id, placeholder }) => new Input({ id, placeholder }).node;
+const newInput = ({ placeholder }) => new Input({ placeholder }).node;
 
 export default newInput;

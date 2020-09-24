@@ -13,7 +13,6 @@ function TodoEditModal({ todo }) {
   };
 
   this.node = Modal({
-    id: `todo_item_edit_modal_${todo.todoid}`,
     title: 'Edit Note',
     text: todo.content,
     event: this.modalEditEvent

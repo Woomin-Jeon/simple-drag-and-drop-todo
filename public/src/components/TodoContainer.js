@@ -25,7 +25,6 @@ function TodoContainer({ category }) {
   this.titleEditModal = TitleEditModal({ category })
   this.todoForm = TodoForm({ category });
   this.todoFormButton = Button({
-    id: `todo_form_add_button_${category}`,
     className: `todo_form_add_button`,
     title: '+',
     event: this.todoAddButtonEvent.bind(this),

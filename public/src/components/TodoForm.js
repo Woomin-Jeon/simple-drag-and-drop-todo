@@ -6,7 +6,6 @@ import { addTodo } from '../apis/todo.js';
 function TodoForm({ category }) {
   this.node = document.createElement('div');
   this.node.classList.add('hidden');
-  this.node.setAttribute('id', `todo_form_${category}`);
 
   this.addButtonEvent = async () => {
     await addTodo(this.textarea.value, category);
@@ -28,21 +27,18 @@ function TodoForm({ category }) {
   }
 
   this.textarea = Textarea({
-    id: `todo_input_${category}`,
     text: '',
     className: 'todo_input_textarea',
     placeholder: 'Enter a note',
     event: this.textAreaEvent.bind(this)
   });
   this.addButton = Button({
-    id: `todo_button_${category}`,
     className: 'todo_input_button_confirm',
     title: 'Add',
     event: this.addButtonEvent.bind(this),
     disabled: true,
   });
   this.cancelButton = Button({
-    id: `todo_cancel_button_${category}`,
     className: 'todo_input_button_cancel',
     title: 'Cancel',
     event: this.cancelButtonEvent.bind(this)

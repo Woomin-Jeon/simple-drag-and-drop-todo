@@ -12,7 +12,6 @@ function SideSlider() {
   };
   
   this.node.appendChild(Button({
-    id: 'side_slider_close_button',
     className: 'side_slider_close_button',
     title: 'x',
     event: this.closeSliderButtonEvent,
