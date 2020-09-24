@@ -11,12 +11,42 @@ function TodoContainer({ category }) {
   this.node.classList.add('todo_container');
   this.node.setAttribute('droppable', 'true');
 
-  this.node.addEventListener('dragover', (event) => event.preventDefault());
+  this.node.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    
+    store.dragTarget.classList.add('transparent');
+
+    const { pageX, pageY } = event;
+    const adjacentElement = document.elementFromPoint(pageX, pageY);
+    const adjacentContainer = adjacentElement.closest('.todo_container');
+    let adjacentItem = adjacentElement.closest('.todo_container_item');
+
+    if (!adjacentItem) {
+      adjacentItem = document.elementFromPoint(pageX, pageY + 10).closest('.todo_container_item');
+    }
+
+    if (!adjacentItem) {
+      adjacentContainer.insertAdjacentElement('beforeend', store.dragTarget);
+      return;
+    }
+
+    const { y, height } = adjacentItem.getClientRects()[0];
+    const top = y;
+    const bottom = y + height;
+    const center = (top + bottom) / 2;
+
+    if (pageY < center) {
+      adjacentItem.insertAdjacentElement('beforebegin', store.dragTarget);
+    } else {
+      adjacentItem.insertAdjacentElement('afterend', store.dragTarget);
+    }
+  });
+
   this.node.addEventListener('drop', async (event) => {
+    store.dragTarget.classList.remove('transparent');
     const targetTodoId = event.dataTransfer.getData('todoid');
 
     await moveTodo(targetTodoId, category);
-    await updateRendering();
   });
 
   this.todoAddButtonEvent = () => {

@@ -14,6 +14,8 @@ function TodoItem({ todo, category }) {
   this.node.addEventListener('dragstart', (event) => {
     const targetTodoId = event.target.dataset.todoid;
     event.dataTransfer.setData('todoid', targetTodoId);
+    
+    action.setDragTarget(event.target);
   });
 
   this.node.addEventListener('dblclick', (event) => {

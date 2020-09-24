@@ -10,6 +10,11 @@ body {
   display: none;
 }
 
+.transparent {
+  border: 1.5px dashed;
+  opacity: 0.3;
+}
+
 .popup {
   position: absolute;
   border: 1px solid;

@@ -5,6 +5,7 @@ export const store = {
   todos: [],
   categories: [],
   currentModal: null,
+  dragTarget: null,
 };
 
 export const action = {
@@ -18,6 +19,9 @@ export const action = {
   setTargetModal(modal) {
     store.currentModal = modal;
   },
+  setDragTarget(dom) {
+    store.dragTarget = dom;
+  }
 };
 
 export const util = {
