@@ -25,6 +25,7 @@ DB_HOST_IP=127.0.0.1
 DB_ID=your_db_id_here
 DB_PASSWORD=your_db_password_here
 SESSION_SECRET=session_secret_key
+IS_DUMMY_ROUTE_ON=true # true or false
 ```
 
 ---
