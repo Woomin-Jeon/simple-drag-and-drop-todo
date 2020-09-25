@@ -1,6 +1,8 @@
+const URL = process.env.SERVER_URL;
+
 const axios = {
-  async post(url, data) {
-    const response = await fetch(`http://localhost:3000${url}`, {
+  async post(path, data) {
+    const response = await fetch(`${URL}${path}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -9,8 +11,8 @@ const axios = {
     return response;
   },
 
-  async get(url) {
-    const response = await fetch(`http://localhost:3000${url}`);
+  async get(path) {
+    const response = await fetch(`${URL}${path}`);
     const result = response.json();
 
     return result;
