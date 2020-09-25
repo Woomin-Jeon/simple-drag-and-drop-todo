@@ -21,7 +21,9 @@ app.use(session({
 }));
 
 app.get('/', (req, res) => res.render('index.html'));
-app.use('/', require('./routes'));
+
+const routePath = process.env.IS_DUMMY_ROUTE_ON ? './dummy-routes' : './routes';
+app.use('/', require(routePath));
 
 app.use((err, req, res, next) => {
   console.error(err);
