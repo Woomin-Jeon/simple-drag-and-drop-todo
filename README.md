@@ -1,6 +1,10 @@
-# TodoList - J181
+# Drag and Drop Todo
 
 드래그 앤 드롭 기능을 가진 투두앱을 Vanilla JavaScript로 구현해보았습니다.
+
+## 프로젝트 화면
+
+<img src="./file/todo.gif" />
 
 ## Getting Start
 
